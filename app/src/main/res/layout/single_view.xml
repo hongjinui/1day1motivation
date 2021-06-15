@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/round_border"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    >
+    <RelativeLayout
+        android:layout_width="215dp"
+        android:layout_height="120dp"
+        >
+
+        <ImageView
+            android:id="@+id/ImageView_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@color/colorBlue"
+
+            >
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/TextView_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="33dp"
+            android:textColor="@color/black"
+            android:text="08:00"
+            android:textSize="15sp"
+            android:background="#30000000"
+            />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="안녕하세요 제목입니다 이라구요요요sdfsdfsadfsdafsadfsadsadfsdafsadfsadfsda"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:paddingLeft="5dp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="2000000 view" />
+
+    </LinearLayout>
+
+</LinearLayout>

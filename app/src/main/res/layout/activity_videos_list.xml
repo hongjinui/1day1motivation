@@ -5,20 +5,31 @@
     android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VideosListActivity">
+    tools:context=".VideosListActivity"
+    android:orientation="vertical"
+    >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/design_default_color_primary"
-            app:title="play list"
-            app:titleMarginStart="5dp"/>
-    </RelativeLayout>
+            app:title="PLAY LIST"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            />
+
+    </LinearLayout>
+
 
 
     <com.google.android.material.navigation.NavigationView
@@ -27,7 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_navigation"
-        app:menu="@menu/menu_navigation" />
+        app:menu="@menu/menu_navigation"
+        />
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
