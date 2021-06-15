@@ -26,16 +26,18 @@
             android:layout_height="70dp"
             android:background="@drawable/relativelayout"
             android:clickable="true"
+            android:onClick="onClick"
             >
 
             <ImageView
                 android:id="@+id/ImageView_1"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/exercise_motivation"
-                />
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="23dp"
+                android:src="@drawable/exercise_vlog" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,6 +59,7 @@
             android:layout_height="70dp"
             android:background="@drawable/relativelayout"
             android:clickable="true"
+            android:onClick="onClick"
             >
 
             <ImageView
@@ -65,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/exercise_motivation"/>
+                android:src="@drawable/exercise"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,6 +89,7 @@
             android:layout_height="70dp"
             android:background="@drawable/relativelayout"
             android:clickable="true"
+            android:onClick="onClick"
             >
 
             <ImageView
@@ -94,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/exercise_motivation"
+                android:src="@drawable/studying_vlog"
                 />
 
             <TextView
@@ -116,6 +120,7 @@
             android:layout_height="70dp"
             android:background="@drawable/relativelayout"
             android:clickable="true"
+            android:onClick="onClick"
             >
 
             <ImageView
@@ -124,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/exercise_motivation"
+                android:src="@drawable/wise_saying"
                 />
 
             <TextView
