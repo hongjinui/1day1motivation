@@ -29,23 +29,24 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.RelativeLayout_1:
                 keyword = "#운동브이로그";
-                System.out.println(1);
                 break;
             case R.id.RelativeLayout_2:
                 keyword = "#운동동기부여";
-                System.out.println(2);
                 break;
             case R.id.RelativeLayout_3:
                 keyword = "#공부브이로그";
-                System.out.println(3);
                 break;
             case R.id.RelativeLayout_4:
                 keyword = "#명언동기부여";
-                System.out.println(4);
                 break;
         }
         System.out.println(keyword);
         Intent intent = new Intent(MainActivity.this, VideosListActivity.class);
+
+        if(keyword == null && keyword.equals("")){
+            return;
+        }
+
         intent.putExtra("keyword",keyword);
         startActivity(intent);
     }
