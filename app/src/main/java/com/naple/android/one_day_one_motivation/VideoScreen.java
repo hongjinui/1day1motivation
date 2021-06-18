@@ -20,11 +20,14 @@ public class VideoScreen extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_screen);
 
+        Bundle bundle = getIntent().getExtras();
+        String videoId = bundle.getString("videoId");
+
         youtubeView = findViewById(R.id.YouTubePlayerView);
         listener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.loadVideo("RacA3OimSRE"); //
+                youTubePlayer.loadVideo(videoId); //
             }
 
             @Override
@@ -32,6 +35,6 @@ public class VideoScreen extends YouTubeBaseActivity {
 
             }
         };
-        youtubeView.initialize("RacA3OimSRE", listener);
+        youtubeView.initialize(videoId, listener);
     }
 }

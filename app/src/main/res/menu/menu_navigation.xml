@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:title="동기부여(home)"
+        android:id="@+id/wise_saying_motivation"
+        android:icon="@drawable/wise_saying"/>
+    <item
         android:title="운동브이로그"
         android:id="@+id/exercise_vlog"
         android:icon="@drawable/exercise_vlog"/>
@@ -13,8 +17,5 @@
         android:title="공부브이로그"
         android:id="@+id/studying_vlog"
         android:icon="@drawable/studying_vlog"/>
-    <item
-        android:title="명언동기부여"
-        android:id="@+id/wise_saying_motivation"
-        android:icon="@drawable/wise_saying"/>
+
 </menu>

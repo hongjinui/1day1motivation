@@ -2,9 +2,12 @@
 
  import android.content.Intent;
  import android.os.Bundle;
+ import android.os.StrictMode;
  import android.view.Menu;
  import android.view.MenuItem;
  import android.view.View;
+ import android.widget.LinearLayout;
+ import android.widget.TextView;
  import android.widget.Toast;
 
  import androidx.annotation.NonNull;
@@ -17,8 +20,8 @@
  import androidx.recyclerview.widget.RecyclerView;
 
  import com.google.android.material.navigation.NavigationView;
+ import com.google.api.services.youtube.model.Video;
 
- import java.util.ArrayList;
  import java.util.List;
 
  public class VideosListActivity extends AppCompatActivity {
@@ -36,14 +39,25 @@
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Search search = new Search();
         createEntity();
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras() ==  null ? new Bundle() : getIntent().getExtras();
         String keyword = bundle.getString("keyword");
+        if( keyword != null && !keyword.equals("")) {
+        } else{
+            keyword = "#동기부여";
+        }
 
+        toolbar = findViewById(R.id.Toolbar);
+        toolbar.setTitle(keyword);
+
+        List<Video> videoList = search.getVideos(keyword);
+        /*
         List<VideoDTO> videoDTOList = new ArrayList<>();
-
-//        videoDTOList = getVideos(keyword);
         VideoDTO videoDTO = new VideoDTO();
         videoDTO.setDuration("08:00");
         videoDTO.setTitle(keyword);
@@ -53,9 +67,21 @@
         videoDTO.setDuration("12:12");
         videoDTO.setTitle(keyword);
         videoDTOList.add(videoDTO);
-
-        adapter = new RecyclerViewAdapter(videoDTOList);
+        */
+        adapter = new RecyclerViewAdapter(videoList);
         recyclerView.setAdapter(adapter);
+
+        RecyclerViewAdapter adapter2 = new RecyclerViewAdapter();
+        adapter2.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                String videoId = videoList.get(pos).getId();
+                Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
+                intent.putExtra("videoId", videoId);
+                System.out.println(videoId + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                startActivity(intent);
+            }
+        });
 
 
         // 네비게이션 화면 이벤트 처리
@@ -77,8 +103,8 @@
                         keyword = "#공부브이로그";
                         break;
                     case R.id.wise_saying_motivation:
-                        Toast.makeText(VideosListActivity.this, "명언동기부여!", Toast.LENGTH_SHORT).show();
-                        keyword = "#명언동기부여";
+                        Toast.makeText(VideosListActivity.this, "동기부여!", Toast.LENGTH_SHORT).show();
+                        keyword = "#동기부여";
                         break;
                 }
 
@@ -89,6 +115,7 @@
                 return true;
             }
         });
+
     }
 
     // entity 생성
@@ -96,7 +123,8 @@
 
          navigationView = findViewById(R.id.NavigationView);
          drawerLayout = findViewById(R.id.DrawerLayout);
-         toolbar = findViewById(R.id.toolbar);
+         toolbar = findViewById(R.id.Toolbar);
+
 
          setSupportActionBar(toolbar);
          ActionBar actionBar = getSupportActionBar();
@@ -129,10 +157,32 @@
 
          return true;
      }
-
+/*
      public void onClick(View view) {
-         Toast.makeText(this, "헬로우", Toast.LENGTH_SHORT).show();
-         Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
-         startActivity(intent);
-     }
+
+        try {
+            System.out.println("1");
+            String text = "";
+            if (view.getId() == R.id.LinearLayout_recycler){
+                System.out.println("2");
+                LinearLayout linearLayout = findViewById(R.id.LinearLayout_recycler);
+                if(linearLayout.getChildAt(1).getId() == R.id.LinearLayout_videoInfo){
+                    System.out.println("3");
+
+                    LinearLayout linearLayout2 = findViewById(R.id.LinearLayout_videoInfo);
+                    TextView textView = (TextView)linearLayout2.getChildAt(3);
+                    text = textView.getText().toString();
+
+                    System.out.println(text + "#################");
+                }
+            }else{
+            }
+            Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
+            intent.putExtra("videoId", text);
+            startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+     }*/
  }
