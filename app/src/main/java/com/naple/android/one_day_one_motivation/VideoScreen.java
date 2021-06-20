@@ -1,7 +1,5 @@
 package com.naple.android.one_day_one_motivation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;

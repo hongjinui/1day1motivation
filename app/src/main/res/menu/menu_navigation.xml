@@ -4,7 +4,7 @@
     <item
         android:title="동기부여(home)"
         android:id="@+id/wise_saying_motivation"
-        android:icon="@drawable/wise_saying"/>
+        android:icon="@drawable/home"/>
     <item
         android:title="운동브이로그"
         android:id="@+id/exercise_vlog"

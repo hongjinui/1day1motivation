@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.google.apis:google-api-services-youtube:v3-rev20210601-1.31.0'
     implementation fileTree(dir: 'C:\\IoT_workspace\\1day1motivation\\app\\libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation 'com.google.oauth-client:google-oauth-client-jetty:1.31.0'
+    implementation fileTree(dir: 'C:\\Users\\houag\\AndroidStudioProjects\\1day1motivation\\app\\libs', include: ['*.aar', '*.jar'], exclude: [])
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

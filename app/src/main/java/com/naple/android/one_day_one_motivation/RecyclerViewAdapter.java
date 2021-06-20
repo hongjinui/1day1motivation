@@ -1,10 +1,8 @@
 package com.naple.android.one_day_one_motivation;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,11 +20,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Video> dataSet = null;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(View view, int pos);
     }
+
     static private OnItemClickListener mListener = null;
-    public void setOnItemClickListener(OnItemClickListener listener){
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.mListener = listener;
     }
 
@@ -60,9 +60,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        if( mListener != null){
-                            mListener.onItemClick(view,pos);
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onItemClick(view, pos);
                         }
                     }
 
@@ -71,12 +71,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         public TextView getTextView_duration() {return textView_duration;}
+
         public TextView getTextView_title() {return textView_title;}
+
         public TextView getTextView_channelTitle() {return textView_channelTitle;}
+
         public TextView getTextView_viewCount() {return textView_viewCount;}
+
         public TextView getTextView_videoId() {return textView_videoId;}
 
-        public ImageView getImageView_thumbnail() { return imageView_thumbnail;}
+        public ImageView getImageView_thumbnail() {return imageView_thumbnail;}
 //        }
     }
 
@@ -86,10 +90,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param dataSet String[] containing the data to populate views to be used
      *                by RecyclerView.
      */
-    public RecyclerViewAdapter(List<Video> dataSet) {
-        this.dataSet = dataSet;
-    }
-    public RecyclerViewAdapter(){}
+    public RecyclerViewAdapter(List<Video> dataSet) {this.dataSet = dataSet;}
+
+    public RecyclerViewAdapter() {}
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -110,24 +113,58 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         BigInteger views = dataSet.get(position).getStatistics().getViewCount();
 
         // duration 변경
-        String duration= dataSet.get(position).getContentDetails().getDuration();
+        String duration = dataSet.get(position).getContentDetails().getDuration();
+        duration = formatDuration(duration);
 
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView_duration().setText(duration);
         viewHolder.getTextView_title().setText(dataSet.get(position).getSnippet().getTitle());
-        viewHolder.getTextView_channelTitle().setText("by  "+dataSet.get(position).getSnippet().getChannelTitle());
+        viewHolder.getTextView_channelTitle().setText("by  " + dataSet.get(position).getSnippet().getChannelTitle());
         viewHolder.getTextView_viewCount().setText(decimalFormat.format(views) + "  views");
         viewHolder.getTextView_videoId().setText(dataSet.get(position).getId());
 
         //썸네일 이미지 로드
         Thumbnail thumbnail = (Thumbnail) dataSet.get(position).getSnippet().getThumbnails().get("medium");
+
         Picasso.get().load(thumbnail.getUrl()).into(viewHolder.getImageView_thumbnail());
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
-    public int getItemCount() {return dataSet != null ? dataSet.size() : 0;}
+    public int getItemCount() {
+        return dataSet != null ? dataSet.size() : 0;
+    }
+
+    private String formatDuration(String duration) {
+
+        duration = duration.replace("PT", "");
+        String[] strArr = duration.split("M");
+
+        String mm = "";
+        String ss = "";
+
+        // 영상 시간이 mm,ss 둘 다 있을 때
+        if (strArr.length == 2){
+            if (strArr[0] != null && strArr[0].length() == 1)      { mm = "0" + strArr[0];}
+            else if (strArr[0] != null )                           { mm = strArr[0];}
+
+            if (strArr[1] != null &&strArr[1].length() == 1)       { ss = "00"; }
+            else if(strArr[1] != null && strArr[1].length() == 2 ) { ss = "0"+ strArr[1];}
+            else if(strArr[1] != null)                             { ss = strArr[1];}
+
+            ss = ss.replace("S", "");
+        // mm만 있을때
+        }else{
+            if (strArr[0] != null && strArr[0].length() == 1)      { mm = "0" + strArr[0];}
+            else if (strArr[0] != null )                           { mm = strArr[0];}
+
+            ss = "00";
+        }
+
+        return mm + ":" + ss;
+
+    }
 }

@@ -6,8 +6,6 @@
  import android.view.Menu;
  import android.view.MenuItem;
  import android.view.View;
- import android.widget.LinearLayout;
- import android.widget.TextView;
  import android.widget.Toast;
 
  import androidx.annotation.NonNull;
@@ -78,7 +76,6 @@
                 String videoId = videoList.get(pos).getId();
                 Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
                 intent.putExtra("videoId", videoId);
-                System.out.println(videoId + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 startActivity(intent);
             }
         });
@@ -91,19 +88,19 @@
                 String keyword = "";
                 switch (item.getItemId()) {
                     case R.id.exercise_motivation:
-                        Toast.makeText(VideosListActivity.this, "운동브이로그!", Toast.LENGTH_SHORT).show();
-                        keyword = "#운동브이로그";
-                        break;
-                    case R.id.exercise_vlog:
-                        Toast.makeText(VideosListActivity.this, "운동동기부여!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VideosListActivity.this, "운동 동기부여", Toast.LENGTH_SHORT).show();
                         keyword = "#운동동기부여";
                         break;
+                    case R.id.exercise_vlog:
+                        Toast.makeText(VideosListActivity.this, "운동 브이로그", Toast.LENGTH_SHORT).show();
+                        keyword = "#운동브이로그";
+                        break;
                     case R.id.studying_vlog:
-                        Toast.makeText(VideosListActivity.this, "공부브이로그!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VideosListActivity.this, "공부 브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "#공부브이로그";
                         break;
                     case R.id.wise_saying_motivation:
-                        Toast.makeText(VideosListActivity.this, "동기부여!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
                         keyword = "#동기부여";
                         break;
                 }
