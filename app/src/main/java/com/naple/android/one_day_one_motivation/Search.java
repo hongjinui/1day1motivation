@@ -59,7 +59,7 @@ public class Search {
     /**
      * Global instance of the max number of videos we want returned (50 = upper limit per page).
      */
-    private static final long NUMBER_OF_VIDEOS_RETURNED = 15;
+    private static final long NUMBER_OF_VIDEOS_RETURNED = 30;
 
     /**
      * Global instance of Youtube object to make all API requests.
@@ -97,12 +97,12 @@ public class Search {
              * console.developers.google.com/). This is good practice and increased your quota.
              */
 
-//            String apiKey = "AIzaSyBPAxFq5iRbOdN0nfqzzEg2xna_50X7Tig";  // youtubedataapi
-            String apiKey = "AIzaSyDPEg-AOa1cDHezrnJ5ndUD0oF6cFm1UFI";  // knou.ac.kr
+            String apiKey = "AIzaSyBPAxFq5iRbOdN0nfqzzEg2xna_50X7Tig";  // youtubedataapi
+//            String apiKey = "AIzaSyDPEg-AOa1cDHezrnJ5ndUD0oF6cFm1UFI";  // knou.ac.kr
 
             search.setKey(apiKey);
             search.setQ(queryTerm);
-//            search.setOrder("date");
+            search.setOrder("date");
             search.setVideoDuration("medium");
             /*
              * We are only searching for videos (not playlists or channels). If we were searching for
@@ -131,7 +131,7 @@ public class Search {
 
             videos.setKey(apiKey);
             videos.setId(idList);
-            videos.setFields("items(kind,id,snippet/channelTitle,snippet/title,snippet/thumbnails,contentDetails/duration,statistics/viewCount)");
+            videos.setFields("items(kind,id,snippet/publishedAt,snippet/channelTitle,snippet/title,snippet/thumbnails,contentDetails/duration,statistics/viewCount)");
             search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
 
             videoList = videos.execute().getItems();

@@ -104,16 +104,19 @@
                         keyword = "#동기부여";
                         break;
                 }
-
                 Intent intent = new Intent(VideosListActivity.this, VideosListActivity.class);
                 intent.putExtra("keyword", keyword);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+
 
                 return true;
             }
         });
 
     }
+
+
 
     // entity 생성
     private void createEntity() {
@@ -182,4 +185,38 @@
         }
 
      }*/
+     private long lastTimeBackPressed;
+
+     @Override
+     public void onBackPressed() {
+
+
+         if(drawerLayout.isDrawerOpen(navigationView)){
+             drawerLayout.closeDrawer(navigationView);
+         }else{
+             //2초 이내에 뒤로가기 버튼을 재 클릭 시 앱 종료
+
+
+             if (System.currentTimeMillis() - lastTimeBackPressed < 2000)
+             {
+                 AppFinish();
+                 return;
+             }
+             Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+             lastTimeBackPressed = System.currentTimeMillis();
+
+
+         }
+     }
+     //앱종료
+     public void AppFinish(){
+         finish();
+         System.exit(0);
+         android.os.Process.killProcess(android.os.Process.myPid());
+     }
+
+     @Override
+     protected void onDestroy() {
+         super.onDestroy();
+     }
  }

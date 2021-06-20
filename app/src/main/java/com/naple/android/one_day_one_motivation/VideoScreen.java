@@ -1,6 +1,8 @@
 package com.naple.android.one_day_one_motivation;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -25,6 +27,8 @@ public class VideoScreen extends YouTubeBaseActivity {
         listener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.setFullscreen(true);
+                youTubePlayer.setShowFullscreenButton(false);
                 youTubePlayer.loadVideo(videoId); //
             }
 
@@ -33,6 +37,12 @@ public class VideoScreen extends YouTubeBaseActivity {
 
             }
         };
+
         youtubeView.initialize(videoId, listener);
     }
+        @Override
+        public void onConfigurationChanged (@NonNull Configuration newConfig){
+            super.onConfigurationChanged(newConfig);
+        }
+
 }

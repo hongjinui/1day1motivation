@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -40,7 +41,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView textView_title;
         private TextView textView_channelTitle;
         private TextView textView_viewCount;
-        private TextView textView_videoId;
 
         private ImageView imageView_thumbnail;
 
@@ -54,7 +54,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textView_channelTitle = view.findViewById(R.id.TextView_channelTitle);
             textView_viewCount = view.findViewById(R.id.TextView_viewCount);
             imageView_thumbnail = view.findViewById(R.id.ImageView_thumbnail);
-            textView_videoId = view.findViewById(R.id.TextView_videoId);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +77,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public TextView getTextView_viewCount() {return textView_viewCount;}
 
-        public TextView getTextView_videoId() {return textView_videoId;}
 
         public ImageView getImageView_thumbnail() {return imageView_thumbnail;}
 //        }
@@ -116,14 +114,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String duration = dataSet.get(position).getContentDetails().getDuration();
         duration = formatDuration(duration);
 
+        // publishedAt
+
+        String publishedAt = dataSet.get(position).getSnippet().getPublishedAt().toString();
+        publishedAt = publishedAt.substring(0,10);
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView_duration().setText(duration);
         viewHolder.getTextView_title().setText(dataSet.get(position).getSnippet().getTitle());
         viewHolder.getTextView_channelTitle().setText("by  " + dataSet.get(position).getSnippet().getChannelTitle());
-        viewHolder.getTextView_viewCount().setText(decimalFormat.format(views) + "  views");
-        viewHolder.getTextView_videoId().setText(dataSet.get(position).getId());
+        viewHolder.getTextView_viewCount().setText(decimalFormat.format(views) + " views · " + publishedAt);
 
         //썸네일 이미지 로드
         Thumbnail thumbnail = (Thumbnail) dataSet.get(position).getSnippet().getThumbnails().get("medium");
