@@ -97,13 +97,18 @@ public class Search {
              * console.developers.google.com/). This is good practice and increased your quota.
              */
 
-            String apiKey = "AIzaSyBPAxFq5iRbOdN0nfqzzEg2xna_50X7Tig";  // youtubedataapi
-//            String apiKey = "AIzaSyDPEg-AOa1cDHezrnJ5ndUD0oF6cFm1UFI";  // knou.ac.kr
+//            String apiKey = "AIzaSyBPAxFq5iRbOdN0nfqzzEg2xna_50X7Tig";  // youtubedataapi
+            String apiKey = "AIzaSyDPEg-AOa1cDHezrnJ5ndUD0oF6cFm1UFI";  // knou.ac.kr
 
             search.setKey(apiKey);
             search.setQ(queryTerm);
             search.setOrder("date");
             search.setVideoDuration("medium");
+            // setVideoEmbeddable 웹페이지로 퍼갈 수 있는 동영상만 포함
+            // setVideoSyndicated 유튜브 외부에서 재생할 수 있는 동영상만 포함
+            search.setVideoEmbeddable("true");
+            search.setVideoSyndicated("true");
+
             /*
              * We are only searching for videos (not playlists or channels). If we were searching for
              * more, we would add them as a string like this: "video,playlist,channel".
