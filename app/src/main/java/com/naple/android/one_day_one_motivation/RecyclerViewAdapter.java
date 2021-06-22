@@ -14,12 +14,12 @@ import com.squareup.picasso.Picasso;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<Video> dataSet = null;
+    private List<Video> dataSet = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, int pos);
@@ -77,7 +77,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public TextView getTextView_viewCount() {return textView_viewCount;}
 
-
         public ImageView getImageView_thumbnail() {return imageView_thumbnail;}
 //        }
     }
@@ -115,7 +114,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         duration = formatDuration(duration);
 
         // publishedAt
-
         String publishedAt = dataSet.get(position).getSnippet().getPublishedAt().toString();
         publishedAt = publishedAt.substring(0,10);
 
@@ -135,9 +133,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
-    public int getItemCount() {
-        return dataSet != null ? dataSet.size() : 0;
-    }
+    public int getItemCount() { return dataSet == null ? 0 : dataSet.size();}
 
     private String formatDuration(String duration) {
 

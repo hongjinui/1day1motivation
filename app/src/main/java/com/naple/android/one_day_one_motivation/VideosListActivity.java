@@ -1,6 +1,5 @@
 package com.naple.android.one_day_one_motivation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -19,17 +18,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.api.services.youtube.model.Video;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideosListActivity extends AppCompatActivity {
+
+    static private List<Video> videoList = new ArrayList<>();
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -62,7 +60,7 @@ public class VideosListActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle(keyword);
 
-        List<Video> videoList = search.getVideos(keyword);
+        videoList = search.getVideos(keyword);
         /*
         List<VideoDTO> videoDTOList = new ArrayList<>();
         VideoDTO videoDTO = new VideoDTO();
@@ -75,6 +73,11 @@ public class VideosListActivity extends AppCompatActivity {
         videoDTO.setTitle(keyword);
         videoDTOList.add(videoDTO);
         */
+        if(videoList == null || videoList.size() == 0){
+            System.out.println("하루 할당량 쿼리 소진");
+            return;
+        }
+
         adapter = new RecyclerViewAdapter(videoList);
         recyclerView.setAdapter(adapter);
 
@@ -82,7 +85,6 @@ public class VideosListActivity extends AppCompatActivity {
         adapter2.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-
                 String videoId = videoList.get(pos).getId();
                 Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
                 intent.putExtra("videoId", videoId);
@@ -120,7 +122,7 @@ public class VideosListActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(navigationView);
                 recyclerView.removeAllViews();
                 toolbar.setTitle(keyword);
-                List<Video> videoList = search.getVideos(keyword);
+                videoList = search.getVideos(keyword);
                 adapter = new RecyclerViewAdapter(videoList);
                 recyclerView.setAdapter(adapter);
 

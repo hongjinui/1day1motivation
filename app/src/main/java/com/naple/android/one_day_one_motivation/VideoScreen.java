@@ -9,7 +9,6 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-
 public class VideoScreen extends YouTubeBaseActivity {
 
     YouTubePlayerView youtubeView;
@@ -29,6 +28,7 @@ public class VideoScreen extends YouTubeBaseActivity {
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.setFullscreen(true);
                 youTubePlayer.setShowFullscreenButton(false);
+
                 youTubePlayer.loadVideo(videoId); //
             }
 
