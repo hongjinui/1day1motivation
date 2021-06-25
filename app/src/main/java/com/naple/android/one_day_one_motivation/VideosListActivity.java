@@ -61,18 +61,7 @@ public class VideosListActivity extends AppCompatActivity {
         toolbar.setTitle(keyword);
 
         videoList = search.getVideos(keyword);
-        /*
-        List<VideoDTO> videoDTOList = new ArrayList<>();
-        VideoDTO videoDTO = new VideoDTO();
-        videoDTO.setDuration("08:00");
-        videoDTO.setTitle(keyword);
-        videoDTOList.add(videoDTO);
 
-        videoDTO = new VideoDTO();
-        videoDTO.setDuration("12:12");
-        videoDTO.setTitle(keyword);
-        videoDTOList.add(videoDTO);
-        */
         if(videoList == null || videoList.size() == 0){
             System.out.println("하루 할당량 쿼리 소진");
             return;
@@ -99,19 +88,19 @@ public class VideosListActivity extends AppCompatActivity {
                 String keyword = "";
                 switch (item.getItemId()) {
                     case R.id.exercise_motivation:
-                        Toast.makeText(VideosListActivity.this, "운동 동기부여", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "운동 동기부여", Toast.LENGTH_SHORT).show();
                         keyword = "#운동동기부여";
                         break;
                     case R.id.exercise_vlog:
-                        Toast.makeText(VideosListActivity.this, "운동 브이로그", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "운동 브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "#운동브이로그";
                         break;
                     case R.id.studying_vlog:
-                        Toast.makeText(VideosListActivity.this, "공부 브이로그", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "공부 브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "#공부브이로그";
                         break;
                     case R.id.wise_saying_motivation:
-                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
                         keyword = "#동기부여";
                         break;
                 }
@@ -125,6 +114,7 @@ public class VideosListActivity extends AppCompatActivity {
                 videoList = search.getVideos(keyword);
                 adapter = new RecyclerViewAdapter(videoList);
                 recyclerView.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
 
                 return true;
             }

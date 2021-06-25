@@ -97,8 +97,8 @@ public class Search {
              * console.developers.google.com/). This is good practice and increased your quota.
              */
 
-//            String apiKey = "AIzaSyBPAxFq5iRbOdN0nfqzzEg2xna_50X7Tig";  // youtubedataapi
-            String apiKey = "AIzaSyDPEg-AOa1cDHezrnJ5ndUD0oF6cFm1UFI";  // knou.ac.kr
+            String apiKey = "AIzaSyBPAxFq5iRbOdN0nfqzzEg2xna_50X7Tig";  // youtubedataapi
+//            String apiKey = "AIzaSyDPEg-AOa1cDHezrnJ5ndUD0oF6cFm1UFI";  // knou.ac.kr
 
             search.setKey(apiKey);
             search.setQ(queryTerm);
