@@ -1,6 +1,7 @@
 package com.naple.android.one_day_one_motivation;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -22,12 +23,20 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.api.services.youtube.model.Video;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VideosListActivity extends AppCompatActivity {
 
-    static private List<Video> videoList = new ArrayList<>();
+//    private List<Video> videoList = new ArrayList<>();
+    private ArrayList<VideoDTO> videoDTOList;
+
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -37,7 +46,6 @@ public class VideosListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private AdView adView_video_list;
     private AdView adView_navi;
-//    List<VideoDTO> dataSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,31 +58,39 @@ public class VideosListActivity extends AppCompatActivity {
         Search search = new Search();
         createEntity();
 
-        Bundle bundle = getIntent().getExtras() == null ? new Bundle() : getIntent().getExtras();
-        String keyword = bundle.getString("keyword");
-        if (keyword != null && !keyword.equals("")) {
-        } else {
-            keyword = "#동기부여";
-        }
+        String keyword = "#동기부여";
+
+//        Bundle bundle = getIntent().getExtras() == null ? new Bundle() : getIntent().getExtras();
+//        String keyword = bundle.getString("keyword");
+//        if (keyword != null && !keyword.equals("")) {
+//        } else {
+//            keyword = "#동기부여";
+//        }
 
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle(keyword);
 
-        videoList = search.getVideos(keyword);
+        VideoDAO videoDAO = new VideoDAO();
+        videoDAO.execute(keyword);
+        String videoListResult = videoDAO.getmJsonString();
+        videoDTOList = JsonString2JsonArray(videoListResult);
 
-        if(videoList == null || videoList.size() == 0){
-            System.out.println("하루 할당량 쿼리 소진");
-            return;
-        }
+//        videoList = search.getVideos(keyword);
 
-        adapter = new RecyclerViewAdapter(videoList);
+//        if(videoList == null || videoList.size() == 0){
+//            System.out.println("하루 할당량 쿼리 소진");
+//            return;
+//        }
+
+        adapter = new RecyclerViewAdapter(videoDTOList);
         recyclerView.setAdapter(adapter);
 
-        RecyclerViewAdapter adapter2 = new RecyclerViewAdapter();
-        adapter2.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+        //선택된 영상 보기 위한 어댑터
+        RecyclerViewAdapter clickedRecyclerViewAdapter = new RecyclerViewAdapter();
+        clickedRecyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                String videoId = videoList.get(pos).getId();
+                String videoId = videoDTOList.get(pos).getVideoId();
                 Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
                 intent.putExtra("videoId", videoId);
                 startActivity(intent);
@@ -83,7 +99,7 @@ public class VideosListActivity extends AppCompatActivity {
 
         // 네비게이션 화면 이벤트 처리
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            //            @Override
+            @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 String keyword = "";
                 switch (item.getItemId()) {
@@ -104,22 +120,54 @@ public class VideosListActivity extends AppCompatActivity {
                         keyword = "#동기부여";
                         break;
                 }
-                /*Intent intent = new Intent(VideosListActivity.this, VideosListActivity.class);
-                intent.putExtra("keyword", keyword);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);*/
+                //비디오리스트 클리어 후 재검색
                 drawerLayout.closeDrawer(navigationView);
-                recyclerView.removeAllViews();
                 toolbar.setTitle(keyword);
-                videoList = search.getVideos(keyword);
-                adapter = new RecyclerViewAdapter(videoList);
+                videoDTOList.clear();
+//                videoList = search.getVideos(keyword);
+
+                videoDAO.execute(keyword);
+                String videoListResult = videoDAO.getmJsonString();
+                videoDTOList = JsonString2JsonArray(videoListResult);
+
+                adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);
-//                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
 
                 return true;
             }
         });
 
+    }
+
+    private ArrayList<VideoDTO> JsonString2JsonArray(String videoListResult) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(videoListResult);
+            JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+            for(int i=0; i<jsonArray.length(); i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+
+                VideoDTO videoDTO = new VideoDTO();
+                videoDTO.setVideoId(object.getString("video_id"));
+                videoDTO.setTitle(object.getString("title"));
+                videoDTO.setThumbnails(object.getString("thumbnails"));
+                videoDTO.setViewCount(object.getString("view_count"));
+                videoDTO.setPublishedAt(object.getString("published_at"));
+                videoDTO.setChannelTitle(object.getString("channel_title"));
+                videoDTO.setDuration(object.getString("duration"));
+
+                videoDTOList.add(videoDTO);
+            }
+
+            return videoDTOList;
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -171,9 +219,9 @@ public class VideosListActivity extends AppCompatActivity {
 
     private long lastTimeBackPressed;
 
+    // 뒤로가기 눌렀을 때
     @Override
     public void onBackPressed() {
-
 
         if (drawerLayout.isDrawerOpen(navigationView)) {
             drawerLayout.closeDrawer(navigationView);

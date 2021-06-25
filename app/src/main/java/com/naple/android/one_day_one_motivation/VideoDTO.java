@@ -6,10 +6,38 @@ public class VideoDTO implements Serializable {
 
     private String channelId;
     private String title;
-    private String thumbnailUrl;
+    private String thumbnails;
     private String channelTitle;
     private String duration;
     private String viewCount;
+
+    public String getThumbnails() {
+        return thumbnails;
+    }
+
+    public void setThumbnails(String thumbnails) {
+        this.thumbnails = thumbnails;
+    }
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+
+    private String publishedAt;
+    private String videoId;
+
+
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
 
     public String getChannelId() {
         return channelId;
@@ -27,13 +55,6 @@ public class VideoDTO implements Serializable {
         this.title = title;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
 
     public String getChannelTitle() {
         return channelTitle;

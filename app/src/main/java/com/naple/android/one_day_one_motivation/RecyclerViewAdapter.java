@@ -19,7 +19,7 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<Video> dataSet = new ArrayList<>();
+    private ArrayList<VideoDTO> dataSet = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, int pos);
@@ -87,7 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param dataSet String[] containing the data to populate views to be used
      *                by RecyclerView.
      */
-    public RecyclerViewAdapter(List<Video> dataSet) {this.dataSet = dataSet;}
+    public RecyclerViewAdapter(ArrayList<VideoDTO> dataSet) {this.dataSet = dataSet;}
 
     public RecyclerViewAdapter() {}
 
@@ -107,27 +107,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         // viewCount 콤마 찍기
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
-        BigInteger views = dataSet.get(position).getStatistics().getViewCount();
+        String views = dataSet.get(position).getViewCount();
 
         // duration 변경
-        String duration = dataSet.get(position).getContentDetails().getDuration();
+        String duration = dataSet.get(position).getDuration();
         duration = formatDuration(duration);
 
         // publishedAt
-        String publishedAt = dataSet.get(position).getSnippet().getPublishedAt().toString();
+        String publishedAt = dataSet.get(position).getPublishedAt().toString();
         publishedAt = publishedAt.substring(0,10);
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView_duration().setText(duration);
-        viewHolder.getTextView_title().setText(dataSet.get(position).getSnippet().getTitle());
-        viewHolder.getTextView_channelTitle().setText("by  " + dataSet.get(position).getSnippet().getChannelTitle());
+        viewHolder.getTextView_title().setText(dataSet.get(position).getTitle());
+        viewHolder.getTextView_channelTitle().setText("by  " + dataSet.get(position).getChannelTitle());
         viewHolder.getTextView_viewCount().setText(decimalFormat.format(views) + " views · " + publishedAt);
 
         //썸네일 이미지 로드
-        Thumbnail thumbnail = (Thumbnail) dataSet.get(position).getSnippet().getThumbnails().get("medium");
+//        Thumbnail thumbnail = (Thumbnail) dataSet.get(position).getThumbnails().get("medium");
 
-        Picasso.get().load(thumbnail.getUrl()).into(viewHolder.getImageView_thumbnail());
+//        Picasso.get().load(thumbnail.getUrl()).into(viewHolder.getImageView_thumbnail());
 
     }
 
