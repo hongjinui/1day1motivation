@@ -28,7 +28,6 @@ public class VideoDAO extends AsyncTask<String, Void, String>{
     protected void onPreExecute() {
         super.onPreExecute();
 
-        System.out.println("@@@@@@@@@@@@@@@@mJsonString :"+ mJsonString);
     }
 
     @Override
@@ -50,24 +49,14 @@ public class VideoDAO extends AsyncTask<String, Void, String>{
 
         String keyword = params[0];
 
-        String serverURL = "C:\\Users\\houag\\AndroidStudioProjects\\select.php";
-        String postParameters = "keyword="+keyword;
+        String serverURL = "http://napl.asuscomm.com:9998/api/"+keyword;
 
-/*
         try {
             URL url = new URL(serverURL);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
 
-            httpURLConnection.setReadTimeout(3000);
-            httpURLConnection.setConnectTimeout(3000);
-            httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setDoInput(true);
+            httpURLConnection.setRequestMethod("GET");
             httpURLConnection.connect();
-
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            outputStream.write(postParameters.getBytes("UTF-8"));
-            outputStream.flush();
-            outputStream.close();
 
             int responseStatusCode = httpURLConnection.getResponseCode();
             Log.d(TAG, "response code - "+ responseStatusCode);
@@ -79,7 +68,7 @@ public class VideoDAO extends AsyncTask<String, Void, String>{
                 inputStream = httpURLConnection.getErrorStream();
             }
 
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -101,8 +90,6 @@ public class VideoDAO extends AsyncTask<String, Void, String>{
             return null;
         }
 
- */
-        return  null;
     }
 
 
