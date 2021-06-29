@@ -1,17 +1,66 @@
 package com.naple.android.one_day_one_motivation;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Path;
+
+
+public class VideoDAO {
+
+//    private String keyword;
+
+//    public VideoDAO(String keyword){
+//        this.keyword = keyword;
+//    }
+//
+    public String getVideoList(String keyword){
+
+        String serverURL = "http://napl.asuscomm.com:9998/api/"+keyword;
+
+        try {
+            URL url = new URL(serverURL);
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
+
+            int responseStatusCode = httpURLConnection.getResponseCode();
+
+            InputStream inputStream;
+            if(responseStatusCode == httpURLConnection.HTTP_OK){
+                inputStream = httpURLConnection.getInputStream();
+            }else{
+                inputStream = httpURLConnection.getErrorStream();
+            }
+
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+
+            while( (line = bufferedReader.readLine()) != null){
+                stringBuilder.append(line);
+            }
+
+            bufferedReader.close();
+
+            return stringBuilder.toString().trim();
+
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+}
+
+/*
 
 public class VideoDAO extends AsyncTask<String, Void, String>{
 
@@ -94,3 +143,4 @@ public class VideoDAO extends AsyncTask<String, Void, String>{
 
 
 }
+*/

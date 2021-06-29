@@ -37,15 +37,16 @@ public class VideosListActivity extends AppCompatActivity {
 //    private List<Video> videoList = new ArrayList<>();
     private ArrayList<VideoDTO> videoDTOList;
 
-
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
+    private RecyclerViewAdapter adapter;
     private AdView adView_video_list;
     private AdView adView_navi;
+
+    private VideoDAO videoDAO = new VideoDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,36 +59,19 @@ public class VideosListActivity extends AppCompatActivity {
         Search search = new Search();
         createEntity();
 
-        String keyword = "#동기부여";
-
-//        Bundle bundle = getIntent().getExtras() == null ? new Bundle() : getIntent().getExtras();
-//        String keyword = bundle.getString("keyword");
-//        if (keyword != null && !keyword.equals("")) {
-//        } else {
-//            keyword = "#동기부여";
-//        }
+        String keyword = "동기부여";
 
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle(keyword);
 
-        VideoDAO videoDAO = new VideoDAO();
-        videoDAO.execute(keyword);
-        String videoListResult = videoDAO.getmJsonString();
+        String videoListResult =  videoDAO.getVideoList(keyword);
         videoDTOList = JsonString2JsonArray(videoListResult);
-
-//        videoList = search.getVideos(keyword);
-
-//        if(videoList == null || videoList.size() == 0){
-//            System.out.println("하루 할당량 쿼리 소진");
-//            return;
-//        }
 
         adapter = new RecyclerViewAdapter(videoDTOList);
         recyclerView.setAdapter(adapter);
 
         //선택된 영상 보기 위한 어댑터
-        RecyclerViewAdapter clickedRecyclerViewAdapter = new RecyclerViewAdapter();
-        clickedRecyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
                 String videoId = videoDTOList.get(pos).getVideoId();
@@ -104,20 +88,20 @@ public class VideosListActivity extends AppCompatActivity {
                 String keyword = "";
                 switch (item.getItemId()) {
                     case R.id.exercise_motivation:
-//                        Toast.makeText(VideosListActivity.this, "운동 동기부여", Toast.LENGTH_SHORT).show();
-                        keyword = "#운동동기부여";
+                        Toast.makeText(VideosListActivity.this, "운동 동기부여", Toast.LENGTH_SHORT).show();
+                        keyword = "운동동기부여";
                         break;
                     case R.id.exercise_vlog:
-//                        Toast.makeText(VideosListActivity.this, "운동 브이로그", Toast.LENGTH_SHORT).show();
-                        keyword = "#운동브이로그";
+                        Toast.makeText(VideosListActivity.this, "운동 브이로그", Toast.LENGTH_SHORT).show();
+                        keyword = "운동브이로그";
                         break;
                     case R.id.studying_vlog:
-//                        Toast.makeText(VideosListActivity.this, "공부 브이로그", Toast.LENGTH_SHORT).show();
-                        keyword = "#공부브이로그";
+                        Toast.makeText(VideosListActivity.this, "공부 브이로그", Toast.LENGTH_SHORT).show();
+                        keyword = "공부브이로그";
                         break;
                     case R.id.wise_saying_motivation:
-//                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
-                        keyword = "#동기부여";
+                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
+                        keyword = "동기부여";
                         break;
                 }
                 //비디오리스트 클리어 후 재검색
@@ -126,8 +110,7 @@ public class VideosListActivity extends AppCompatActivity {
                 videoDTOList.clear();
 //                videoList = search.getVideos(keyword);
 
-                videoDAO.execute(keyword);
-                String videoListResult = videoDAO.getmJsonString();
+                String videoListResult =  videoDAO.getVideoList(keyword);
                 videoDTOList = JsonString2JsonArray(videoListResult);
 
                 adapter = new RecyclerViewAdapter(videoDTOList);

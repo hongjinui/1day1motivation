@@ -89,11 +89,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     public RecyclerViewAdapter(ArrayList<VideoDTO> dataSet) {this.dataSet = dataSet;}
 
-    public RecyclerViewAdapter() {}
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.single_view, viewGroup, false);
@@ -103,7 +102,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         // viewCount 콤마 찍기
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
