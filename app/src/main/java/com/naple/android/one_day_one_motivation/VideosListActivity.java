@@ -1,7 +1,6 @@
 package com.naple.android.one_day_one_motivation;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -21,20 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.api.services.youtube.model.Video;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class VideosListActivity extends AppCompatActivity {
 
-//    private List<Video> videoList = new ArrayList<>();
     private ArrayList<VideoDTO> videoDTOList;
 
     private Toolbar toolbar;
@@ -48,6 +38,15 @@ public class VideosListActivity extends AppCompatActivity {
 
     private VideoDAO videoDAO = new VideoDAO();
 
+
+    /*
+     * keyword
+     * 0 : 동기부여
+     * 1 : 운동동기부여
+     * 2 : 운동브이로그
+     * 3 : 공부브이로그
+     *
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,16 +55,14 @@ public class VideosListActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Search search = new Search();
         createEntity();
 
-        String keyword = "동기부여";
-
         toolbar = findViewById(R.id.Toolbar);
-        toolbar.setTitle(keyword);
+        toolbar.setTitle("동기부여");
 
-        String videoListResult =  videoDAO.getVideoList(keyword);
-        videoDTOList = JsonString2JsonArray(videoListResult);
+        //첫 페이지 로딩될 떄 동기부여로 초기화
+        String keyword = "0";
+        videoDTOList = videoDAO.getVideoList(keyword);
 
         adapter = new RecyclerViewAdapter(videoDTOList);
         recyclerView.setAdapter(adapter);
@@ -74,7 +71,7 @@ public class VideosListActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                String videoId = videoDTOList.get(pos).getVideoId();
+                String videoId = videoDTOList.get(pos).getId();
                 Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
                 intent.putExtra("videoId", videoId);
                 startActivity(intent);
@@ -86,33 +83,35 @@ public class VideosListActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 String keyword = "";
+                String toolbarKeyword = "";
                 switch (item.getItemId()) {
-                    case R.id.exercise_motivation:
-                        Toast.makeText(VideosListActivity.this, "운동 동기부여", Toast.LENGTH_SHORT).show();
-                        keyword = "운동동기부여";
-                        break;
-                    case R.id.exercise_vlog:
-                        Toast.makeText(VideosListActivity.this, "운동 브이로그", Toast.LENGTH_SHORT).show();
-                        keyword = "운동브이로그";
-                        break;
-                    case R.id.studying_vlog:
-                        Toast.makeText(VideosListActivity.this, "공부 브이로그", Toast.LENGTH_SHORT).show();
-                        keyword = "공부브이로그";
-                        break;
                     case R.id.wise_saying_motivation:
                         Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
-                        keyword = "동기부여";
+                        keyword = "0";
+                        toolbarKeyword = "동기부여(home)";
+                        break;
+                    case R.id.exercise_motivation:
+                        Toast.makeText(VideosListActivity.this, "운동동기부여", Toast.LENGTH_SHORT).show();
+                        keyword = "1";
+                        toolbarKeyword = "운동동기부여";
+                        break;
+                    case R.id.exercise_vlog:
+                        Toast.makeText(VideosListActivity.this, "운동브이로그", Toast.LENGTH_SHORT).show();
+                        keyword = "2";
+                        toolbarKeyword = "운동브이로그";
+                        break;
+                    case R.id.studying_vlog:
+                        Toast.makeText(VideosListActivity.this, "공부브이로그", Toast.LENGTH_SHORT).show();
+                        keyword = "3";
+                        toolbarKeyword = "공부브이로그";
                         break;
                 }
                 //비디오리스트 클리어 후 재검색
                 drawerLayout.closeDrawer(navigationView);
-                toolbar.setTitle(keyword);
+                toolbar.setTitle(toolbarKeyword);
                 videoDTOList.clear();
-//                videoList = search.getVideos(keyword);
 
-                String videoListResult =  videoDAO.getVideoList(keyword);
-                videoDTOList = JsonString2JsonArray(videoListResult);
-
+                videoDTOList = videoDAO.getVideoList(keyword);
                 adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -122,37 +121,6 @@ public class VideosListActivity extends AppCompatActivity {
         });
 
     }
-
-    private ArrayList<VideoDTO> JsonString2JsonArray(String videoListResult) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(videoListResult);
-            JSONArray jsonArray = jsonObject.getJSONArray("data");
-
-            for(int i=0; i<jsonArray.length(); i++){
-                JSONObject object = jsonArray.getJSONObject(i);
-
-                VideoDTO videoDTO = new VideoDTO();
-                videoDTO.setVideoId(object.getString("video_id"));
-                videoDTO.setTitle(object.getString("title"));
-                videoDTO.setThumbnails(object.getString("thumbnails"));
-                videoDTO.setViewCount(object.getString("view_count"));
-                videoDTO.setPublishedAt(object.getString("published_at"));
-                videoDTO.setChannelTitle(object.getString("channel_title"));
-                videoDTO.setDuration(object.getString("duration"));
-
-                videoDTOList.add(videoDTO);
-            }
-
-            return videoDTOList;
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     // entity 생성
     private void createEntity() {

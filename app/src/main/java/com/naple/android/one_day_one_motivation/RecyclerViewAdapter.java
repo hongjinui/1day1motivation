@@ -8,14 +8,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.api.services.youtube.model.Thumbnail;
-import com.google.api.services.youtube.model.Video;
 import com.squareup.picasso.Picasso;
 
-import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -106,15 +102,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         // viewCount 콤마 찍기
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
-        String views = dataSet.get(position).getViewCount();
+        Integer views = Integer.parseInt(dataSet.get(position).getViewCount());
 
         // duration 변경
         String duration = dataSet.get(position).getDuration();
         duration = formatDuration(duration);
 
         // publishedAt
-        String publishedAt = dataSet.get(position).getPublishedAt().toString();
-        publishedAt = publishedAt.substring(0,10);
+        String publishedAt = dataSet.get(position).getDate();
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -124,9 +119,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.getTextView_viewCount().setText(decimalFormat.format(views) + " views · " + publishedAt);
 
         //썸네일 이미지 로드
-//        Thumbnail thumbnail = (Thumbnail) dataSet.get(position).getThumbnails().get("medium");
-
-//        Picasso.get().load(thumbnail.getUrl()).into(viewHolder.getImageView_thumbnail());
+        Picasso.get().load(dataSet.get(position).getUrl()).into(viewHolder.getImageView_thumbnail());
 
     }
 
