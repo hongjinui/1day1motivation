@@ -2,11 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.naple.android.one_day_one_motivation">
-
-    <!--외부 인터넷 연결-->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--안드로이드 11버전 호환-->
+    <!-- 외부 인터넷 연결 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 안드로이드 11버전 호환 -->
     <queries>
         <intent>
             <action android:name="com.google.android.youtube.api.service.START" />
@@ -21,12 +18,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.1day1motivation"
-        android:usesCleartextTraffic="true"
-        >
+        android:usesCleartextTraffic="true">
+        <activity android:name=".SplashActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/appId" />
+
         <activity
             android:name=".VideoScreen"
             android:configChanges="screenSize|orientation"
@@ -34,10 +39,7 @@
         <activity
             android:name=".VideosListActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 
