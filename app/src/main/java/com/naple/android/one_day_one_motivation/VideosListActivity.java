@@ -39,14 +39,7 @@ public class VideosListActivity extends AppCompatActivity {
     private VideoDAO videoDAO = new VideoDAO();
 
 
-    /*
-     * keyword
-     * 0 : 동기부여
-     * 1 : 운동동기부여
-     * 2 : 운동브이로그
-     * 3 : 공부브이로그
-     *
-     * */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +52,15 @@ public class VideosListActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle("동기부여");
-
-        //첫 페이지 로딩될 떄 동기부여로 초기화
+        /*
+         * keyword
+         * 0 : 동기부여
+         * 1 : 운동동기부여
+         * 2 : 운동브이로그
+         * 3 : 공부브이로그
+         *  첫 페이지 로딩될 떄 동기부여로 초기화
+         *
+        */
         String keyword = "0";
         videoDTOList = videoDAO.getVideoList(keyword);
 
