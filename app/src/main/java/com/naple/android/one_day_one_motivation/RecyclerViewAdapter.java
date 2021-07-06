@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+// adapter class : 데이터 목록을 아이템 단위의 뷰로 구성하여 화면에 보여주기 위한 클래스
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<VideoDTO> dataSet = new ArrayList<>();
@@ -31,14 +32,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+//    데이터와 뷰를 바인딩해주는 객체, 화면에 표시될 아이템뷰를 저장하는 객체
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //single_view
-        private TextView textView_duration;
-        private TextView textView_title;
-        private TextView textView_channelTitle;
-        private TextView textView_viewCount;
+        private final TextView textView_duration;
+        private final TextView textView_title;
+        private final TextView textView_channelTitle;
+        private final TextView textView_viewCount;
 
-        private ImageView imageView_thumbnail;
+        private final ImageView imageView_thumbnail;
 
 
         public ViewHolder(View view) {

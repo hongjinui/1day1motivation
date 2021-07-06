@@ -1,8 +1,10 @@
 package com.naple.android.one_day_one_motivation;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +51,10 @@ public class VideosListActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         createEntity();
+
+        System.out.println("DEVICE ID : " + Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
+        System.out.println( "DEVICE OS : "+ Build.VERSION.RELEASE.toString());
+        System.out.println( "MODEL : "+ Build.MODEL);
 
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle("동기부여");
@@ -155,13 +161,17 @@ public class VideosListActivity extends AppCompatActivity {
     // 메뉴 아이템 선택 이벤트
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings!", Toast.LENGTH_SHORT).show();
+            case R.id.sort:
+                Toast.makeText(VideosListActivity.this, "settings!", Toast.LENGTH_SHORT).show();
+
+
+
         }
 
 
