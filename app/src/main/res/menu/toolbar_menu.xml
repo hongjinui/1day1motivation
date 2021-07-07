@@ -7,17 +7,6 @@
             android:title="sort"
             app:showAsAction="always"
             android:icon="@drawable/sort">
-            <!--<menu>
-                <item
-                    android:id="@+id/recent"
-                    android:title="recent"
-                    app:showAsAction="never"/>
-                <item
-                    android:id="@+id/view_count"
-                    android:title="view count"
-                    app:showAsAction="never"/>
-            </menu>-->
-
         </item>
     <group>
         <item

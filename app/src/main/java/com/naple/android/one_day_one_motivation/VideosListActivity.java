@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class VideosListActivity extends AppCompatActivity {
 
@@ -36,10 +39,9 @@ public class VideosListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerViewAdapter adapter;
     private AdView adView_video_list;
-    private AdView adView_navi;
+//    private AdView adView_navi;
 
     private VideoDAO videoDAO = new VideoDAO();
-
 
 
     @Override
@@ -52,9 +54,9 @@ public class VideosListActivity extends AppCompatActivity {
 
         createEntity();
 
-        System.out.println("DEVICE ID : " + Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
-        System.out.println( "DEVICE OS : "+ Build.VERSION.RELEASE.toString());
-        System.out.println( "MODEL : "+ Build.MODEL);
+        System.out.println("ANDROID ID : " + Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID));
+        System.out.println("DEVICE OS : " + Build.VERSION.RELEASE.toString());
+
 
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle("동기부여");
@@ -66,7 +68,7 @@ public class VideosListActivity extends AppCompatActivity {
          * 3 : 공부브이로그
          *  첫 페이지 로딩될 떄 동기부여로 초기화
          *
-        */
+         */
         String keyword = "0";
         videoDTOList = videoDAO.getVideoList(keyword);
 
@@ -92,22 +94,22 @@ public class VideosListActivity extends AppCompatActivity {
                 String toolbarKeyword = "";
                 switch (item.getItemId()) {
                     case R.id.wise_saying_motivation:
-                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
                         keyword = "0";
                         toolbarKeyword = "동기부여(home)";
                         break;
                     case R.id.exercise_motivation:
-                        Toast.makeText(VideosListActivity.this, "운동동기부여", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "운동동기부여", Toast.LENGTH_SHORT).show();
                         keyword = "1";
                         toolbarKeyword = "운동동기부여";
                         break;
                     case R.id.exercise_vlog:
-                        Toast.makeText(VideosListActivity.this, "운동브이로그", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "운동브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "2";
                         toolbarKeyword = "운동브이로그";
                         break;
                     case R.id.studying_vlog:
-                        Toast.makeText(VideosListActivity.this, "공부브이로그", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(VideosListActivity.this, "공부브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "3";
                         toolbarKeyword = "공부브이로그";
                         break;
@@ -116,6 +118,8 @@ public class VideosListActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(navigationView);
                 toolbar.setTitle(toolbarKeyword);
                 videoDTOList.clear();
+
+                toolbar.setSubtitle("업로드순서");
 
                 videoDTOList = videoDAO.getVideoList(keyword);
                 adapter = new RecyclerViewAdapter(videoDTOList);
@@ -139,6 +143,7 @@ public class VideosListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.menu);
+
         recyclerView = findViewById(R.id.RecyclerView);
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
@@ -167,14 +172,49 @@ public class VideosListActivity extends AppCompatActivity {
                 break;
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings!", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.sort:
-                Toast.makeText(VideosListActivity.this, "settings!", Toast.LENGTH_SHORT).show();
 
+                Toolbar tx = findViewById(R.id.Toolbar);
+                String subTitle = tx.getSubtitle().toString();
+                if(subTitle.equals("업로드순서")){
+                    tx.setSubtitle("조회수순서");
 
+                    //비디오 리스트 조회수 순서로 정렬
+                    Collections.sort(videoDTOList, new Comparator<VideoDTO>() {
+                        @Override
+                        public int compare(VideoDTO videoDTO, VideoDTO t1) {
+                            if(Integer.parseInt(videoDTO.getViewCount()) < Integer.parseInt(t1.getViewCount())){
+                                return 1;
+                            }else if(Integer.parseInt(videoDTO.getViewCount()) > Integer.parseInt(t1.getViewCount())){
+                                return -1;
+                            }
+                                return 0;
+                        }
+                    });
+                }else {
+                    tx.setSubtitle("업로드순서");
+
+                    //비디오 리스트 업로드 순서로 정렬
+                    Collections.sort(videoDTOList, new Comparator<VideoDTO>() {
+                        @Override
+                        public int compare(VideoDTO videoDTO, VideoDTO t1) {
+                            if(Long.parseLong(videoDTO.getValue()) < Long.parseLong(t1.getValue())){
+                                return 1;
+                            }else if(Long.parseLong(videoDTO.getValue()) > Long.parseLong(t1.getValue())) {
+                                return -1;
+                            }
+                                return 0;
+                        }
+                    });
+                }
+                adapter = new RecyclerViewAdapter(videoDTOList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(VideosListActivity.this, tx.getSubtitle() + " 정렬", Toast.LENGTH_SHORT).show();
+                break;
 
         }
-
-
         return true;
     }
 

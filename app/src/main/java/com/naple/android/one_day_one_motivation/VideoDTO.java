@@ -17,5 +17,6 @@ public class VideoDTO implements Serializable {
     private String viewCount;
     private String date;
     private String id;
+    private String value;
 
 }
