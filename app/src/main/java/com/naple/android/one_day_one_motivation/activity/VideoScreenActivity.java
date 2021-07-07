@@ -1,4 +1,4 @@
-package com.naple.android.one_day_one_motivation;
+package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,8 +8,9 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.naple.android.one_day_one_motivation.R;
 
-public class VideoScreen extends YouTubeBaseActivity {
+public class VideoScreenActivity extends YouTubeBaseActivity {
 
     YouTubePlayerView youtubeView;
     YouTubePlayer.OnInitializedListener listener;

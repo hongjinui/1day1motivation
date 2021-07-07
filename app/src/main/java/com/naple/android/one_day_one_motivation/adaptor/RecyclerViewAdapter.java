@@ -1,4 +1,4 @@
-package com.naple.android.one_day_one_motivation;
+package com.naple.android.one_day_one_motivation.adaptor;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.naple.android.one_day_one_motivation.R;
+import com.naple.android.one_day_one_motivation.model.VideoDTO;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

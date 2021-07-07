@@ -1,14 +1,11 @@
-package com.naple.android.one_day_one_motivation;
+package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,10 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
+import com.naple.android.one_day_one_motivation.R;
+import com.naple.android.one_day_one_motivation.rest.MongoREST;
+import com.naple.android.one_day_one_motivation.adaptor.RecyclerViewAdapter;
+import com.naple.android.one_day_one_motivation.model.VideoDTO;
+import com.naple.android.one_day_one_motivation.util.VideoListComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class VideosListActivity extends AppCompatActivity {
 
@@ -41,7 +42,7 @@ public class VideosListActivity extends AppCompatActivity {
     private AdView adView_video_list;
 //    private AdView adView_navi;
 
-    private VideoDAO videoDAO = new VideoDAO();
+    private MongoREST mongoREST = new MongoREST();
 
 
     @Override
@@ -53,10 +54,6 @@ public class VideosListActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         createEntity();
-
-        System.out.println("ANDROID ID : " + Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID));
-        System.out.println("DEVICE OS : " + Build.VERSION.RELEASE.toString());
-
 
         toolbar = findViewById(R.id.Toolbar);
         toolbar.setTitle("동기부여");
@@ -70,7 +67,7 @@ public class VideosListActivity extends AppCompatActivity {
          *
          */
         String keyword = "0";
-        videoDTOList = videoDAO.getVideoList(keyword);
+        videoDTOList = mongoREST.getVideoList(keyword);
 
         adapter = new RecyclerViewAdapter(videoDTOList);
         recyclerView.setAdapter(adapter);
@@ -79,8 +76,9 @@ public class VideosListActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
+                //클릭한 영상 channelId
                 String videoId = videoDTOList.get(pos).getId();
-                Intent intent = new Intent(VideosListActivity.this, VideoScreen.class);
+                Intent intent = new Intent(VideosListActivity.this, VideoScreenActivity.class);
                 intent.putExtra("videoId", videoId);
                 startActivity(intent);
             }
@@ -121,7 +119,7 @@ public class VideosListActivity extends AppCompatActivity {
 
                 toolbar.setSubtitle("업로드순서");
 
-                videoDTOList = videoDAO.getVideoList(keyword);
+                videoDTOList = mongoREST.getVideoList(keyword);
                 adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -171,42 +169,21 @@ public class VideosListActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.settings:
-                Toast.makeText(VideosListActivity.this, "settings!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.sort:
-
                 Toolbar tx = findViewById(R.id.Toolbar);
                 String subTitle = tx.getSubtitle().toString();
-                if(subTitle.equals("업로드순서")){
+                if (subTitle.equals("업로드순서")) {
+
                     tx.setSubtitle("조회수순서");
-
                     //비디오 리스트 조회수 순서로 정렬
-                    Collections.sort(videoDTOList, new Comparator<VideoDTO>() {
-                        @Override
-                        public int compare(VideoDTO videoDTO, VideoDTO t1) {
-                            if(Integer.parseInt(videoDTO.getViewCount()) < Integer.parseInt(t1.getViewCount())){
-                                return 1;
-                            }else if(Integer.parseInt(videoDTO.getViewCount()) > Integer.parseInt(t1.getViewCount())){
-                                return -1;
-                            }
-                                return 0;
-                        }
-                    });
-                }else {
-                    tx.setSubtitle("업로드순서");
+                    Collections.sort(videoDTOList, new VideoListComparator("조회수순서"));
+                } else {
 
+                    tx.setSubtitle("업로드순서");
                     //비디오 리스트 업로드 순서로 정렬
-                    Collections.sort(videoDTOList, new Comparator<VideoDTO>() {
-                        @Override
-                        public int compare(VideoDTO videoDTO, VideoDTO t1) {
-                            if(Long.parseLong(videoDTO.getValue()) < Long.parseLong(t1.getValue())){
-                                return 1;
-                            }else if(Long.parseLong(videoDTO.getValue()) > Long.parseLong(t1.getValue())) {
-                                return -1;
-                            }
-                                return 0;
-                        }
-                    });
+                    Collections.sort(videoDTOList, new VideoListComparator("업로드순서"));
                 }
                 adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);

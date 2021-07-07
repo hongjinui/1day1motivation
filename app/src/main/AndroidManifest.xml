@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1day1motivation"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SplashActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,11 +33,11 @@
             android:value="@string/appId" />
 
         <activity
-            android:name=".VideoScreen"
+            android:name=".activity.VideoScreenActivity"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".VideosListActivity"
+            android:name=".activity.VideosListActivity"
             android:screenOrientation="portrait">
 
         </activity>

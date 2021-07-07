@@ -1,7 +1,8 @@
-package com.naple.android.one_day_one_motivation;
+package com.naple.android.one_day_one_motivation.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.naple.android.one_day_one_motivation.model.VideoDTO;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -11,7 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class VideoDAO {
+public class MongoREST {
 
     public ArrayList<VideoDTO> getVideoList(String keyword){
 

@@ -1,4 +1,4 @@
-package com.naple.android.one_day_one_motivation;
+package com.naple.android.one_day_one_motivation.model;
 
 import java.io.Serializable;
 
