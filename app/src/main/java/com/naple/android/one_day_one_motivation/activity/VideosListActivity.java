@@ -1,6 +1,7 @@
 package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -128,6 +129,7 @@ public class VideosListActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     // entity 생성
@@ -152,6 +154,9 @@ public class VideosListActivity extends AppCompatActivity {
 //        adView_navi = findViewById(R.id.adView_navi);
 //        adView_navi.loadAd(adRequest);
 
+        //로그인 정보 insert or update -- 앱 사용 날짜, 총 로그인 횟수 등등
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shardPreferences), MODE_PRIVATE);
+        mongoREST.loginInsertOrUpdate(sharedPreferences.getString("uuid",""));
     }
 
     // 툴바에 메뉴들 나열?

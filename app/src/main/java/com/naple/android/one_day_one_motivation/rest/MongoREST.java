@@ -63,4 +63,30 @@ public class MongoREST {
 
     }
 
+    public void loginInsertOrUpdate(String uuid) {
+
+        String serverURL = "http://napl.asuscomm.com/user?uuid=" + uuid;
+
+        try {
+            URL url = new URL(serverURL);
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
+
+            int responseStatusCode = httpURLConnection.getResponseCode();
+
+            InputStream inputStream;
+            if(responseStatusCode == httpURLConnection.HTTP_OK){
+                inputStream = httpURLConnection.getInputStream();
+            }else{
+                inputStream = httpURLConnection.getErrorStream();
+            }
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+
+    }
 }
