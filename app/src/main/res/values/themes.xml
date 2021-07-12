@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/status_bar</item>
-        <item name="colorPrimaryVariant">@color/status_bar</item>
-        <item name="colorOnPrimary">@color/colorGray</item>
+        <item name="colorPrimary">@color/status_bar</item>          <!--액션 바의 배경색-->
+        <item name="colorPrimaryVariant">@color/status_bar</item>   <!--상태 바의 배경색-->
+        <item name="colorOnPrimary">@color/colorGray</item>         <!---->
         <!-- Secondary brand color. -->
         <!--<item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

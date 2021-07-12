@@ -1,5 +1,6 @@
 package com.naple.android.one_day_one_motivation.activity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -158,7 +159,7 @@ public class VideosListActivity extends AppCompatActivity {
 
         //로그인 정보 insert or update -- 앱 사용 날짜, 총 로그인 횟수 등등
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shardPreferences), MODE_PRIVATE);
-        mongoREST.loginInsertOrUpdate(sharedPreferences.getString("uuid",""));
+        mongoREST.loginInsertOrUpdate(sharedPreferences.getString("uuid", ""));
     }
 
     // 툴바에 메뉴들 나열?
@@ -168,6 +169,11 @@ public class VideosListActivity extends AppCompatActivity {
         return true;
     }
 
+    /*@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }*/
+
     // 메뉴 아이템 선택 이벤트
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -175,12 +181,30 @@ public class VideosListActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
+
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.light:
+                Toast.makeText(VideosListActivity.this, "Theme is light", Toast.LENGTH_SHORT).show();
+                item.setChecked(true);
+                setTheme(R.style.Theme_1day1motivation);
+                setContentView(R.layout.activity_videos_list);
+                break;
+
+            case R.id.dark:
+                Toast.makeText(VideosListActivity.this, "Theme is dark", Toast.LENGTH_SHORT).show();
+                item.setChecked(true);
+                setTheme(R.style.Theme_1day1motivation_night);
+                setContentView(R.layout.activity_videos_list);
+
+                break;
+
             case R.id.open_source_licence:
                 startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
                 break;
+
             case R.id.sort:
                 Toolbar tx = findViewById(R.id.Toolbar);
                 String subTitle = tx.getSubtitle().toString();
