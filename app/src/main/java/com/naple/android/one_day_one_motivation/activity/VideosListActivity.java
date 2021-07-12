@@ -185,6 +185,7 @@ public class VideosListActivity extends AppCompatActivity {
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
                 break;
+/*
 
             case R.id.light:
                 Toast.makeText(VideosListActivity.this, "Theme is light", Toast.LENGTH_SHORT).show();
@@ -200,6 +201,7 @@ public class VideosListActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_videos_list);
 
                 break;
+*/
 
             case R.id.open_source_licence:
                 startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
