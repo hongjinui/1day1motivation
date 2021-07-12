@@ -8,7 +8,9 @@
     <item
         android:title="운동브이로그"
         android:id="@+id/exercise_vlog"
-        android:icon="@drawable/exercise_vlog"/>
+        android:icon="@drawable/exercise_vlog"
+        
+        />
     <item
         android:title="운동동기부여"
         android:id="@+id/exercise_motivation"

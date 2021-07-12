@@ -2,24 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/status_bar</item>          <!--액션 바의 배경색-->
-        <item name="colorPrimaryVariant">@color/status_bar</item>   <!--상태 바의 배경색-->
-        <item name="colorOnPrimary">@color/colorGray</item>         <!---->
+        <item name="colorPrimary">@color/primary</item>             <!--액션 바의 배경색-->
+        <item name="colorPrimaryDark">@color/primaryDark</item>     <!--상태 바의 배경색-->
+        <item name="colorAccent">@color/primaryDark</item>          <!--강조 색-->
         <!-- Secondary brand color. -->
         <!--<item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>-->
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primaryDark</item>
         <!-- Customize your theme here. -->
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
 
     </style>
 
     <!--splash theme-->
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
-        <!-- Customize your theme here. -->
-
+        <item name="android:windowFullscreen">true</item>       <!--상태바 숨김 처리-->
     </style>
 </resources>
