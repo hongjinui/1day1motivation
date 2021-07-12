@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SplashActivity"
-    >
-    <ImageView
+    android:orientation="vertical"
+    tools:context=".activity.LicenseInfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar_license"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+
+
+    <TextView
+        android:id="@+id/TextView_license"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash"
-        android:background="@color/white"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
         />
 
 </LinearLayout>

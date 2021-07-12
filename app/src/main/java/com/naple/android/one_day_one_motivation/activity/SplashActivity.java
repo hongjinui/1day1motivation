@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
     private class splashHandler implements Runnable {
         public void run() {
             startActivity(new Intent(getApplication(), VideosListActivity.class));
-            SplashActivity.this.finish();
+            finish();
 
         }
     }

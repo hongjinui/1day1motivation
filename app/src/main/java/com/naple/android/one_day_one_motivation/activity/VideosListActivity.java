@@ -2,6 +2,7 @@ package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -48,6 +49,7 @@ public class VideosListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        setTheme(R.style.SplashTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
 
@@ -92,7 +94,7 @@ public class VideosListActivity extends AppCompatActivity {
                 String keyword = "";
                 String toolbarKeyword = "";
                 switch (item.getItemId()) {
-                    case R.id.wise_saying_motivation:
+                    case R.id.home_motivation:
 //                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
                         keyword = "0";
                         toolbarKeyword = "동기부여(home)";
@@ -175,6 +177,9 @@ public class VideosListActivity extends AppCompatActivity {
                 break;
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.open_source_licence:
+                startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
                 break;
             case R.id.sort:
                 Toolbar tx = findViewById(R.id.Toolbar);
