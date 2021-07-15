@@ -9,7 +9,6 @@
             <action android:name="com.google.android.youtube.api.service.START" />
         </intent>
     </queries>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_splash"
@@ -18,8 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_splash"
         android:supportsRtl="true"
         android:theme="@style/Theme.1day1motivation"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".activity.LicenseInfoActivity"></activity>
+        android:usesCleartextTraffic="true"
+        >
+        <activity android:name=".activity.LicenseInfoActivity"/>
         <activity android:name=".activity.OpenSourceListActivity" />
         <activity
             android:name=".activity.SplashActivity"
@@ -43,7 +43,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.VideosListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+
+            />
     </application>
 
 </manifest>

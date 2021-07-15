@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
+        <!--<androidx.appcompat.widget.Toolbar
             android:id="@+id/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="키워드"
             app:subtitle="업로드순서"
             android:paddingBottom="5dp"
-            />
+            />-->
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView_video_list"

@@ -11,4 +11,6 @@
     <color name="primary">#30666666</color>
     <color name="primaryDark">#99666666</color>
     <color name="colorControlHighlight">#50666666</color>
+
+    <color name="night_background">#10000000</color>
 </resources>

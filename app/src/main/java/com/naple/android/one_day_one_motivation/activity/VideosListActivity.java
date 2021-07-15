@@ -1,9 +1,7 @@
 package com.naple.android.one_day_one_motivation.activity;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -44,23 +42,35 @@ public class VideosListActivity extends AppCompatActivity {
     private RecyclerViewAdapter adapter;
     private AdView adView_video_list;
 //    private AdView adView_navi;
-
+    private ActionBar actionBar;
     private MongoREST mongoREST = new MongoREST();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        setTheme(R.style.SplashTheme);
+        Intent intent = getIntent();
+        String theme = intent.getStringExtra("theme");
+        if( theme != null && !theme.equals("")){
+            if(theme.equals("Theme_1day1motivation")){
+                Toast.makeText(VideosListActivity.this, "Theme is light", Toast.LENGTH_SHORT).show();
+                getApplicationContext().setTheme(R.style.Theme_1day1motivation);
+            }else if(theme.equals("Theme_1day1motivation_night")){
+                Toast.makeText(VideosListActivity.this, "Theme is dark", Toast.LENGTH_SHORT).show();
+                getApplicationContext().setTheme(R.style.Theme_1day1motivation_night);
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        createEntity();
+        actionBar = getSupportActionBar();
 
-        toolbar = findViewById(R.id.Toolbar);
-        toolbar.setTitle("동기부여");
+        createEntity();
+        actionBar.setTitle("동기부여");
+        /*toolbar = findViewById(R.id.Toolbar);
+        toolbar.setTitle("동기부여");*/
         /*
          * keyword
          * 0 : 동기부여
@@ -118,10 +128,10 @@ public class VideosListActivity extends AppCompatActivity {
                 }
                 //비디오리스트 클리어 후 재검색
                 drawerLayout.closeDrawer(navigationView);
-                toolbar.setTitle(toolbarKeyword);
                 videoDTOList.clear();
 
-                toolbar.setSubtitle("업로드순서");
+                actionBar.setTitle(toolbarKeyword);
+                actionBar.setSubtitle("업로드순서");
 
                 videoDTOList = mongoREST.getVideoList(keyword);
                 adapter = new RecyclerViewAdapter(videoDTOList);
@@ -140,12 +150,16 @@ public class VideosListActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.NavigationView);
         drawerLayout = findViewById(R.id.DrawerLayout);
-        toolbar = findViewById(R.id.Toolbar);
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.menu);
+
+        /*toolbar = findViewById(R.id.Toolbar);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.menu);
+        actionBar.setHomeAsUpIndicator(R.drawable.menu);*/
 
         recyclerView = findViewById(R.id.RecyclerView);
         layoutManager = new GridLayoutManager(this, 1);
@@ -177,6 +191,7 @@ public class VideosListActivity extends AppCompatActivity {
     // 메뉴 아이템 선택 이벤트
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(this, VideosListActivity.class);
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -185,46 +200,41 @@ public class VideosListActivity extends AppCompatActivity {
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
                 break;
-/*
 
             case R.id.light:
-                Toast.makeText(VideosListActivity.this, "Theme is light", Toast.LENGTH_SHORT).show();
+
                 item.setChecked(true);
-                setTheme(R.style.Theme_1day1motivation);
-                setContentView(R.layout.activity_videos_list);
+                intent.putExtra("theme","Theme_1day1motivation");
+                startActivity(intent);
                 break;
 
             case R.id.dark:
-                Toast.makeText(VideosListActivity.this, "Theme is dark", Toast.LENGTH_SHORT).show();
                 item.setChecked(true);
-                setTheme(R.style.Theme_1day1motivation_night);
-                setContentView(R.layout.activity_videos_list);
-
+                intent.putExtra("theme","Theme_1day1motivation_night");
+                startActivity(intent);
                 break;
-*/
 
             case R.id.open_source_licence:
                 startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
                 break;
 
             case R.id.sort:
-                Toolbar tx = findViewById(R.id.Toolbar);
-                String subTitle = tx.getSubtitle().toString();
+                String subTitle = actionBar.getSubtitle().toString();
                 if (subTitle.equals("업로드순서")) {
 
-                    tx.setSubtitle("조회수순서");
+                    actionBar.setSubtitle("조회수순서");
                     //비디오 리스트 조회수 순서로 정렬
                     Collections.sort(videoDTOList, new VideoListComparator("조회수순서"));
                 } else {
 
-                    tx.setSubtitle("업로드순서");
+                    actionBar.setSubtitle("업로드순서");
                     //비디오 리스트 업로드 순서로 정렬
                     Collections.sort(videoDTOList, new VideoListComparator("업로드순서"));
                 }
                 adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(VideosListActivity.this, tx.getSubtitle() + " 정렬", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VideosListActivity.this, actionBar.getSubtitle() + " 정렬", Toast.LENGTH_SHORT).show();
                 break;
 
         }
