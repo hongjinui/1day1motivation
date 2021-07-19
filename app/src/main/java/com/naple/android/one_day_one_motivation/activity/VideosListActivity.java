@@ -48,17 +48,6 @@ public class VideosListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
-        String theme = intent.getStringExtra("theme");
-        if( theme != null && !theme.equals("")){
-            if(theme.equals("Theme_1day1motivation")){
-                Toast.makeText(VideosListActivity.this, "Theme is light", Toast.LENGTH_SHORT).show();
-                getApplicationContext().setTheme(R.style.Theme_1day1motivation);
-            }else if(theme.equals("Theme_1day1motivation_night")){
-                Toast.makeText(VideosListActivity.this, "Theme is dark", Toast.LENGTH_SHORT).show();
-                getApplicationContext().setTheme(R.style.Theme_1day1motivation_night);
-            }
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
 
@@ -154,13 +143,6 @@ public class VideosListActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.menu);
 
-        /*toolbar = findViewById(R.id.Toolbar);
-
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.menu);*/
-
         recyclerView = findViewById(R.id.RecyclerView);
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
@@ -200,20 +182,6 @@ public class VideosListActivity extends AppCompatActivity {
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
                 break;
-
-            case R.id.light:
-
-                item.setChecked(true);
-                intent.putExtra("theme","Theme_1day1motivation");
-                startActivity(intent);
-                break;
-
-            case R.id.dark:
-                item.setChecked(true);
-                intent.putExtra("theme","Theme_1day1motivation_night");
-                startActivity(intent);
-                break;
-
             case R.id.open_source_licence:
                 startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
                 break;

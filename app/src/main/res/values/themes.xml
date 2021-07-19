@@ -13,6 +13,7 @@
 
     </style>
 
+    <!--어두운 테마-->
     <style name="Theme.1day1motivation_night" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>                   <!--액션 바의 배경색-->
