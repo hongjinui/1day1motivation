@@ -50,10 +50,11 @@ public class VideosListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        setTheme(R.style.SplashTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos_list);
 
+        // main thread가 disk I/O나 network 작업을 하는지 감시
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -73,6 +74,7 @@ public class VideosListActivity extends AppCompatActivity {
         String keyword = "0";
         videoDTOList = mongoREST.getVideoList(keyword);
 
+        //
         adapter = new RecyclerViewAdapter(videoDTOList);
         recyclerView.setAdapter(adapter);
 

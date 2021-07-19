@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">1day1motivation</string>
     <string name="appId">ca-app-pub-2589428744654889~2272854987</string>
-    <string name="adUnitId">ca-app-pub-2589428744654889/2111953328</string>
+    <string name="adUnitId">ca-app-pub-2589428744654889/7499234691</string>
     <string name="adUnitIdTest">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="shardPreferences">shardPreferences</string>

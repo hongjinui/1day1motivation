@@ -34,7 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-//    데이터와 뷰를 바인딩해주는 객체, 화면에 표시될 아이템뷰를 저장하는 객체
+    //데이터와 뷰를 바인딩해주는 객체, 화면에 표시될 아이템뷰를 저장하는 객체
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //single_view
         private final TextView textView_duration;
@@ -88,7 +88,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      *                by RecyclerView.
      */
     public RecyclerViewAdapter(ArrayList<VideoDTO> dataSet) {this.dataSet = dataSet;}
-
 
     // Create new views (invoked by the layout manager)
     @Override
