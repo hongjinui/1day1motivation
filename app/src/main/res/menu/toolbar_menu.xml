@@ -11,21 +11,6 @@
     <item
         android:id="@+id/settings"
         android:title="Settings" />
-    <!--<item
-        android:id="@+id/theme"
-        android:title="Theme">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/light"
-                    android:checked="true"
-                    android:title="Light" />
-                <item
-                    android:id="@+id/dark"
-                    android:title="Dark" />
-            </group>
-        </menu>
-    </item>-->
     <item
         android:id="@+id/open_source_licence"
         android:title="Open-source license" />
