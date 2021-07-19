@@ -22,9 +22,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 import com.naple.android.one_day_one_motivation.R;
-import com.naple.android.one_day_one_motivation.rest.MongoREST;
 import com.naple.android.one_day_one_motivation.adaptor.RecyclerViewAdapter;
 import com.naple.android.one_day_one_motivation.model.VideoDTO;
+import com.naple.android.one_day_one_motivation.rest.MongoREST;
 import com.naple.android.one_day_one_motivation.util.VideoListComparator;
 
 import java.util.ArrayList;
@@ -34,7 +34,6 @@ public class VideosListActivity extends AppCompatActivity {
 
     private ArrayList<VideoDTO> videoDTOList;
 
-    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private RecyclerView recyclerView;
@@ -42,6 +41,7 @@ public class VideosListActivity extends AppCompatActivity {
     private RecyclerViewAdapter adapter;
     private AdView adView_video_list;
 //    private AdView adView_navi;
+
     private ActionBar actionBar;
     private MongoREST mongoREST = new MongoREST();
 
@@ -59,8 +59,7 @@ public class VideosListActivity extends AppCompatActivity {
 
         createEntity();
         actionBar.setTitle("동기부여");
-        /*toolbar = findViewById(R.id.Toolbar);
-        toolbar.setTitle("동기부여");*/
+        actionBar.setSubtitle("업로드순서");
         /*
          * keyword
          * 0 : 동기부여
@@ -167,29 +166,23 @@ public class VideosListActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }*/
-
     // 메뉴 아이템 선택 이벤트
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(this, VideosListActivity.class);
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-
             case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.open_source_licence:
                 startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
                 break;
-
             case R.id.sort:
+
                 String subTitle = actionBar.getSubtitle().toString();
+
                 if (subTitle.equals("업로드순서")) {
 
                     actionBar.setSubtitle("조회수순서");

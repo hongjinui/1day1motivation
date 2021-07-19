@@ -1,31 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>               <!--액션 바의 배경색-->
         <item name="colorPrimaryDark">@color/primaryDark</item>     <!--상태 바의 배경색-->
-        <item name="colorAccent">@color/teal_200</item>          <!--강조 색-->
+        <item name="colorAccent">@color/teal_200</item>             <!--강조 색-->
         <item name="android:statusBarColor" tools:targetApi="l">@color/primaryDark</item>
         <!-- Customize your theme here. -->
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="actionBarSize">58dp</item>
 
-    </style>
-
-    <!--어두운 테마-->
-    <style name="Theme.1day1motivation_night" parent="Theme.MaterialComponents.DayNight">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>                   <!--액션 바의 배경색-->
-        <item name="colorPrimaryDark">@color/night_background</item>    <!--상태 바의 배경색-->
-        <item name="colorAccent">@color/teal_200</item>                 <!--강조 색-->
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item> <!--상태 바의 배경색-->
-        <!-- Customize your theme here. -->
-        <item name="colorControlHighlight">@color/colorControlHighlight</item>
-        <item name="android:windowBackground">@color/night_background</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="colorSurface">@color/black</item>
     </style>
 
     <!--splash theme-->

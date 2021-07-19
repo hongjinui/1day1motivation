@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout_recycler"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginTop="10dp"
-    android:onClick="onClick"
-    android:id="@+id/LinearLayout_recycler"
-
+    android:orientation="vertical"
     >
+
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        >
+        android:layout_height="200dp">
 
         <ImageView
             android:id="@+id/ImageView_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
+
             >
 
         </ImageView>
@@ -30,9 +29,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:background="#20000000"
+            android:paddingRight="5dp"
             android:textColor="@color/white"
-            android:textSize="15sp"
-            android:paddingRight="5dp"/>
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
@@ -41,26 +40,24 @@
         android:id="@+id/LinearLayout_videoInfo"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/TextView_channelTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="채널명 타이틀"
             android:gravity="center"
-            />
+            android:text="채널명 타이틀" />
 
         <TextView
             android:id="@+id/TextView_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="비디오 제목"
-            android:maxLines="1"
             android:ellipsize="end"
-            android:paddingLeft="5dp"
             android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:text="비디오 제목"
 
             />
 

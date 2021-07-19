@@ -11,7 +11,6 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.naple.android.one_day_one_motivation.R;
 
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 
 public class OpenSourceListActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    private ActionBar actionBar;
     private ListView listView;
 
     @Override
@@ -27,10 +26,7 @@ public class OpenSourceListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_source_list);
 
-        toolbar = findViewById(R.id.Toolbar_settings);
-
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("오픈소스 라이선스");
 
