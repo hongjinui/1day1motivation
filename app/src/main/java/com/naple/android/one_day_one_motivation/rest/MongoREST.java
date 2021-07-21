@@ -1,8 +1,9 @@
 package com.naple.android.one_day_one_motivation.rest;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naple.android.one_day_one_motivation.model.VideoDTO;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -46,14 +47,31 @@ public class MongoREST {
 
             bufferedReader.close();
 
-            ObjectMapper mapper = new ObjectMapper();
-            
             //rest api response
             String result = stringBuilder.toString().trim();
-            
-            // 객체로 만들어서 리스트형태로 리턴
-            return mapper.readValue(result, new TypeReference<ArrayList<VideoDTO>>(){});
 
+            ArrayList<VideoDTO> arrayList = new ArrayList<>();
+            VideoDTO videoDTO = null;
+
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0; i<jsonArray.length(); i++){
+                videoDTO = new VideoDTO();
+                JSONObject object = (JSONObject)jsonArray.get(i);
+
+                videoDTO.setTitle(object.get("title").toString());
+                videoDTO.setUrl(object.get("url").toString());
+                videoDTO.setChannelTitle(object.get("channelTitle").toString());
+                videoDTO.setDuration(object.get("duration").toString());
+                videoDTO.setViewCount(object.get("viewCount").toString());
+                videoDTO.setDate(object.get("date").toString());
+                videoDTO.setId(object.get("id").toString());
+                videoDTO.setValue(object.get("value").toString());
+
+                arrayList.add(videoDTO);
+
+            }
+
+            return arrayList;
 
         }catch (Exception e){
 

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -40,7 +39,6 @@ public class VideosListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerViewAdapter adapter;
     private AdView adView_video_list;
-//    private AdView adView_navi;
 
     private ActionBar actionBar;
     private MongoREST mongoREST = new MongoREST();
@@ -72,7 +70,7 @@ public class VideosListActivity extends AppCompatActivity {
         String keyword = "0";
         videoDTOList = mongoREST.getVideoList(keyword);
 
-        //
+        //선택된 영상 보기 위한 어댑터
         adapter = new RecyclerViewAdapter(videoDTOList);
         recyclerView.setAdapter(adapter);
 
@@ -124,12 +122,15 @@ public class VideosListActivity extends AppCompatActivity {
                 actionBar.setSubtitle("업로드순서");
 
                 videoDTOList = mongoREST.getVideoList(keyword);
+
                 adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
                 return true;
             }
+
+
         });
 
 
@@ -151,8 +152,6 @@ public class VideosListActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView_video_list = findViewById(R.id.adView_video_list);
         adView_video_list.loadAd(adRequest);
-//        adView_navi = findViewById(R.id.adView_navi);
-//        adView_navi.loadAd(adRequest);
 
         //로그인 정보 insert or update -- 앱 사용 날짜, 총 로그인 횟수 등등
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shardPreferences), MODE_PRIVATE);
