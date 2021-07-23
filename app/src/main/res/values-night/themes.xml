@@ -2,13 +2,19 @@
     <!-- Base application theme. -->
     <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/night_background</item>   <!--액션 바의 배경색-->
-        <item name="colorPrimaryDark">@color/black</item>     <!--상태 바의 배경색-->
-        <item name="colorAccent">@color/teal_200</item>            <!--강조 색-->
+        <item name="colorPrimary">@color/night_background</item>    <!--액션 바의 배경색-->
+        <item name="colorPrimaryDark">@color/black</item>           <!--상태 바의 배경색-->
+        <item name="colorAccent">@color/teal_200</item>             <!--강조 색-->
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+
         <!-- Customize your theme here. -->
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="actionBarSize">58dp</item>
+
+        <!--actionBar-->
+
+        <!--statusBar-->
+        <item name="android:statusBarColor">@color/black</item>     <!-- 상태바의 배경색-->
+        <item name="android:windowLightStatusBar">false</item>      <!-- 상태바 아이콘 ture : 검은색 아이콘 -->
     </style>
 </resources>
