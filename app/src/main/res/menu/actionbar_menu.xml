@@ -8,9 +8,19 @@
         android:title="sort"
         app:showAsAction="always"/>
 
-    <item
+    <group android:id="@+id/orderGroup"
+        android:checkableBehavior="single">
+        <item android:id="@+id/orderUpload"
+            android:title="Order by Upload"
+            android:checked="true"
+            />
+        <item android:id="@+id/orderViewCount"
+            android:title="Order by ViewCount"
+            />
+    </group>
+    <!--<item
         android:id="@+id/settings"
-        android:title="Settings" />
+        android:title="Settings" />-->
     <item
         android:id="@+id/open_source_licence"
         android:title="Open-source license" />

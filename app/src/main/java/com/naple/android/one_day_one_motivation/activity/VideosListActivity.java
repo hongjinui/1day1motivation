@@ -43,6 +43,9 @@ public class VideosListActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private MongoREST mongoREST = new MongoREST();
 
+    private MenuItem orderUpload;
+    private MenuItem orderViewCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,37 +164,77 @@ public class VideosListActivity extends AppCompatActivity {
     // 툴바에 메뉴들 나열?
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+
+        orderUpload = menu.findItem(R.id.orderUpload);
+        orderViewCount = menu.findItem(R.id.orderViewCount);
+
         return true;
     }
 
     // 메뉴 아이템 선택 이벤트
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.settings:
+            /*case R.id.settings:
                 Toast.makeText(VideosListActivity.this, "settings 준비중..", Toast.LENGTH_SHORT).show();
+                break;*/
+
+            case R.id.orderViewCount:
+
+                item.setChecked(true);
+
+                actionBar.setSubtitle("조회수순서");
+                //비디오 리스트 조회수 순서로 정렬
+                Collections.sort(videoDTOList, new VideoListComparator("조회수순서"));
+
+                adapter = new RecyclerViewAdapter(videoDTOList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(VideosListActivity.this, "조회수순서 정렬", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.orderUpload:
+
+                item.setChecked(true);
+
+                actionBar.setSubtitle("업로드순서");
+                //비디오 리스트 업로드 순서로 정렬
+                Collections.sort(videoDTOList, new VideoListComparator("업로드순서"));
+
+                adapter = new RecyclerViewAdapter(videoDTOList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(VideosListActivity.this, "업로드순서 정렬", Toast.LENGTH_SHORT).show();
+                break;
+
             case R.id.open_source_licence:
                 startActivity(new Intent(getApplication(), OpenSourceListActivity.class));
                 break;
+
             case R.id.sort:
-
                 String subTitle = actionBar.getSubtitle().toString();
-
+                MenuItem menuItem;
                 if (subTitle.equals("업로드순서")) {
 
                     actionBar.setSubtitle("조회수순서");
                     //비디오 리스트 조회수 순서로 정렬
                     Collections.sort(videoDTOList, new VideoListComparator("조회수순서"));
+                    orderViewCount.setChecked(true);
+
                 } else {
 
                     actionBar.setSubtitle("업로드순서");
                     //비디오 리스트 업로드 순서로 정렬
                     Collections.sort(videoDTOList, new VideoListComparator("업로드순서"));
+                    orderUpload.setChecked(true);
+
                 }
                 adapter = new RecyclerViewAdapter(videoDTOList);
                 recyclerView.setAdapter(adapter);
