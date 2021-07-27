@@ -1,21 +1,45 @@
-package com.naple.android.one_day_one_motivation.rest;
+package com.napl.android.motivationPerDay.rest;
 
-import com.naple.android.one_day_one_motivation.model.VideoDTO;
+import com.napl.android.motivationPerDay.model.VideoDTO;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MongoREST {
 
-    public ArrayList<VideoDTO> getVideoList(String keyword){
+    public List<VideoDTO> getVideoList(String keyword){
+
+        // 레트로핏 동기
+
+        List<VideoDTO> arrayList = new ArrayList<>();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://napl.asuscomm.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Retrofit2Service retrofit2Service = retrofit.create(Retrofit2Service.class);
+        try {
+
+            if(retrofit2Service.getData(keyword).execute().isSuccessful()){
+
+                arrayList  = retrofit2Service.getData(keyword).execute().body();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return arrayList;
+/*
 
         String serverURL = "http://napl.asuscomm.com/video?keyword=" + keyword;
 
@@ -78,10 +102,33 @@ public class MongoREST {
             e.printStackTrace();
             return null;
         }
+*/
+
 
     }
 
     public void loginInsertOrUpdate(String uuid) {
+
+//        레트로핏 비동기
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://napl.asuscomm.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Retrofit2Service retrofit2Service = retrofit.create(Retrofit2Service.class);
+        retrofit2Service.getUser(uuid).enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+                if (response.isSuccessful()){
+                    Map<String,String> map = response.body(); // 성공 시 stateCode : 200, msg : success
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+
+            }
+        });
+/*
 
         String serverURL = "http://napl.asuscomm.com/user?uuid=" + uuid;
 
@@ -105,6 +152,7 @@ public class MongoREST {
 
             e.printStackTrace();
         }
+*/
 
     }
 }

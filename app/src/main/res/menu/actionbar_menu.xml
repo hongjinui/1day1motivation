@@ -5,17 +5,17 @@
     <item
         android:id="@+id/sort"
         android:icon="@drawable/sort"
-        android:title="sort"
+        android:title="@string/sort"
         app:showAsAction="always"/>
 
     <group android:id="@+id/orderGroup"
         android:checkableBehavior="single">
         <item android:id="@+id/orderUpload"
-            android:title="Order by Upload"
+            android:title="@string/orderByUpload"
             android:checked="true"
             />
         <item android:id="@+id/orderViewCount"
-            android:title="Order by ViewCount"
+            android:title="@string/orderByViewCount"
             />
     </group>
     <!--<item
@@ -23,5 +23,5 @@
         android:title="Settings" />-->
     <item
         android:id="@+id/open_source_licence"
-        android:title="Open-source license" />
+        android:title="@string/opensourceLicense" />
 </menu>

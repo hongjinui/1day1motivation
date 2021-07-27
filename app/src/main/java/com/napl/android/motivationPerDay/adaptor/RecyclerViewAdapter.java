@@ -1,4 +1,4 @@
-package com.naple.android.one_day_one_motivation.adaptor;
+package com.napl.android.motivationPerDay.adaptor;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +8,18 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.naple.android.one_day_one_motivation.R;
-import com.naple.android.one_day_one_motivation.model.VideoDTO;
+import com.napl.android.motivationPerDay.R;
+import com.napl.android.motivationPerDay.model.VideoDTO;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 // adapter class : 데이터 목록을 아이템 단위의 뷰로 구성하여 화면에 보여주기 위한 클래스
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<VideoDTO> dataSet = new ArrayList<>();
+    private List<VideoDTO> dataSet = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, int pos);
@@ -87,7 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param dataSet String[] containing the data to populate views to be used
      *                by RecyclerView.
      */
-    public RecyclerViewAdapter(ArrayList<VideoDTO> dataSet) {this.dataSet = dataSet;}
+    public RecyclerViewAdapter(List<VideoDTO> dataSet) {this.dataSet = dataSet;}
 
     // Create new views (invoked by the layout manager)
     @Override

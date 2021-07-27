@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="동기부여(home)"
+        android:title="@string/motivationHome"
         android:id="@+id/home_motivation"
         android:icon="@drawable/home"/>
     <item
-        android:title="운동브이로그"
+        android:title="@string/exerciseVlog"
         android:id="@+id/exercise_vlog"
         android:icon="@drawable/exercise_vlog"
         
         />
     <item
-        android:title="운동동기부여"
+        android:title="@string/exerciseMotivation"
         android:id="@+id/exercise_motivation"
         android:icon="@drawable/exercise"/>
     <item
-        android:title="공부브이로그"
+        android:title="@string/studyingVlog"
         android:id="@+id/studying_vlog"
         android:icon="@drawable/studying_vlog"/>
 

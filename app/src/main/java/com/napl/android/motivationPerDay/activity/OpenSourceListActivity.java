@@ -1,4 +1,4 @@
-package com.naple.android.one_day_one_motivation.activity;
+package com.napl.android.motivationPerDay.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.naple.android.one_day_one_motivation.R;
+import com.napl.android.motivationPerDay.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OpenSourceListActivity extends AppCompatActivity {
 
@@ -30,16 +31,16 @@ public class OpenSourceListActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("오픈소스 라이선스");
 
-        ArrayList<String> arrayList = new ArrayList<>();
+        List<String> arrayList = new ArrayList<>();
         arrayList.add("Android material SDK");
         arrayList.add("Androidx appcompat library");
         arrayList.add("Androidx constraintlayout library");
-        arrayList.add("Fasterxml jackson library");
         arrayList.add("Google android library");
         arrayList.add("Google api-client library");
         arrayList.add("Google apis library");
         arrayList.add("Google oauth-client library");
         arrayList.add("Picasso library");
+        arrayList.add("Square retrofit2 library");
         arrayList.add("YouTubeAndroidPlayerApi library");
 
 
@@ -63,11 +64,7 @@ public class OpenSourceListActivity extends AppCompatActivity {
     // 메뉴 아이템 선택 이벤트
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
+        if (item.getItemId() == android.R.id.home) {finish();}
         return true;
     }
 }
