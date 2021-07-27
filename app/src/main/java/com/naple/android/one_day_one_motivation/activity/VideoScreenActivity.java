@@ -1,4 +1,4 @@
-package com.napl.android.motivationPerDay.activity;
+package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.napl.android.motivationPerDay.R;
+import com.naple.android.one_day_one_motivation.R;
 
 public class VideoScreenActivity extends YouTubeBaseActivity {
 

@@ -1,6 +1,6 @@
-package com.napl.android.motivationPerDay.util;
+package com.naple.android.one_day_one_motivation.util;
 
-import com.napl.android.motivationPerDay.model.VideoDTO;
+import com.naple.android.one_day_one_motivation.model.VideoDTO;
 
 import java.util.Comparator;
 

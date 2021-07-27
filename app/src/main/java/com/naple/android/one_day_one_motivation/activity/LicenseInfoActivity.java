@@ -1,4 +1,4 @@
-package com.napl.android.motivationPerDay.activity;
+package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.napl.android.motivationPerDay.R;
+import com.naple.android.one_day_one_motivation.R;
 
 import java.io.InputStream;
 

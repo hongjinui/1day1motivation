@@ -1,4 +1,4 @@
-package com.napl.android.motivationPerDay.activity;
+package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,8 +7,8 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.napl.android.motivationPerDay.R;
-import com.napl.android.motivationPerDay.rest.MongoREST;
+import com.naple.android.one_day_one_motivation.R;
+import com.naple.android.one_day_one_motivation.rest.MongoREST;
 
 import java.util.UUID;
 

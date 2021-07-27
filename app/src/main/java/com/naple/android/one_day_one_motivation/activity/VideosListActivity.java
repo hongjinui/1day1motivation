@@ -1,4 +1,4 @@
-package com.napl.android.motivationPerDay.activity;
+package com.naple.android.one_day_one_motivation.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,11 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
-import com.napl.android.motivationPerDay.R;
-import com.napl.android.motivationPerDay.adaptor.RecyclerViewAdapter;
-import com.napl.android.motivationPerDay.model.VideoDTO;
-import com.napl.android.motivationPerDay.rest.MongoREST;
-import com.napl.android.motivationPerDay.util.VideoListComparator;
+import com.naple.android.one_day_one_motivation.R;
+import com.naple.android.one_day_one_motivation.adaptor.RecyclerViewAdapter;
+import com.naple.android.one_day_one_motivation.model.VideoDTO;
+import com.naple.android.one_day_one_motivation.rest.MongoREST;
+import com.naple.android.one_day_one_motivation.util.VideoListComparator;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.napl.android.motivationPerDay.rest;
+package com.naple.android.one_day_one_motivation.rest;
 
-import com.napl.android.motivationPerDay.model.VideoDTO;
+import com.naple.android.one_day_one_motivation.model.VideoDTO;
 
 import java.util.List;
 import java.util.Map;

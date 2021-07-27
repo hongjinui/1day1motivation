@@ -1,4 +1,4 @@
-package com.napl.android.motivationPerDay.model;
+package com.naple.android.one_day_one_motivation.model;
 
 
 

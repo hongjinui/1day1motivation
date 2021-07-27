@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.napl.android.motivationPerDay">
+    package="com.naple.android.one_day_one_motivation">
     <!-- 외부 인터넷 연결 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,10 +15,10 @@
         android:theme="@style/Theme.1day1motivation"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name="com.napl.android.motivationPerDay.activity.LicenseInfoActivity"/>
-        <activity android:name="com.napl.android.motivationPerDay.activity.OpenSourceListActivity" />
+        <activity android:name=".activity.LicenseInfoActivity"/>
+        <activity android:name=".activity.OpenSourceListActivity" />
         <activity
-            android:name="com.napl.android.motivationPerDay.activity.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             >
@@ -34,11 +34,11 @@
             android:value="@string/appId" />
 
         <activity
-            android:name="com.napl.android.motivationPerDay.activity.VideoScreenActivity"
+            android:name=".activity.VideoScreenActivity"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.napl.android.motivationPerDay.activity.VideosListActivity"
+            android:name=".activity.VideosListActivity"
             android:screenOrientation="portrait"
 
             />
