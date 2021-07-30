@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">youtube.com</domain>
+        <domain includeSubdomains="true">developers.google.com</domain>
+        <domain includeSubdomains="true">console.cloud.google.com</domain>
+        <domain includeSubdomains="true">napl.asuscomm.com</domain>
+    </domain-config>
+</network-security-config>
