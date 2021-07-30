@@ -1,7 +1,5 @@
 package com.naple.android.one_day_one_motivation.model;
 
-
-
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class VideoDTO{
+public class VideoDTO {
 
 
     @SerializedName("title")

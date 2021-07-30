@@ -97,22 +97,18 @@ public class VideosListActivity extends AppCompatActivity {
                 String toolbarKeyword = "";
                 switch (item.getItemId()) {
                     case R.id.home_motivation:
-//                        Toast.makeText(VideosListActivity.this, "동기부여(home)", Toast.LENGTH_SHORT).show();
                         keyword = "0";
                         toolbarKeyword = "동기부여(home)";
                         break;
                     case R.id.exercise_motivation:
-//                        Toast.makeText(VideosListActivity.this, "운동동기부여", Toast.LENGTH_SHORT).show();
                         keyword = "1";
                         toolbarKeyword = "운동동기부여";
                         break;
                     case R.id.exercise_vlog:
-//                        Toast.makeText(VideosListActivity.this, "운동브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "2";
                         toolbarKeyword = "운동브이로그";
                         break;
                     case R.id.studying_vlog:
-//                        Toast.makeText(VideosListActivity.this, "공부브이로그", Toast.LENGTH_SHORT).show();
                         keyword = "3";
                         toolbarKeyword = "공부브이로그";
                         break;
