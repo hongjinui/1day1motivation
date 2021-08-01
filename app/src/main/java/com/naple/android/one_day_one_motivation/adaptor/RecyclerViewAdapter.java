@@ -97,6 +97,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.single_view, viewGroup, false);
 
+
         return new ViewHolder(view);
     }
 

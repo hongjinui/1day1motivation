@@ -1,2 +1,3 @@
 rootProject.name = "1day1motivation"
 include ':app'
+include ':app_kotiln'

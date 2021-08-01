@@ -1,6 +1,6 @@
 package com.naple.android.one_day_one_motivation.util
 
-import com.naple.android.one_day_one_motivation.data.Video
+import com.naple.android.one_day_one_motivation.model.Video
 import java.util.*
 
 class VideoListComparator(var subtitle: String) : Comparator<Video> {

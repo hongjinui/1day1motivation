@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -36,8 +37,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
+
+    sourceSets{
+        main.java.srcDirs += "src/main/kotlin"
     }
 }
 
@@ -72,6 +74,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     // Apache-2.0 License
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation "androidx.core:core-ktx:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // Apache-2.0 License
 
+}
+repositories {
+    mavenCentral()
 }

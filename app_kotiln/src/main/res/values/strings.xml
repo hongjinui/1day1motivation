@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">app_kotiln</string>
+    <string name="app_name">1일1동기부여</string>
+    <string name="appId">ca-app-pub-2589428744654889~2272854987</string>
+    <string name="adUnitId">ca-app-pub-2589428744654889/7499234691</string>
+    <string name="adUnitIdTest">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="shardPreferences">shardPreferences</string>
+
+    <string name="sort">sort</string>
+    <string name="orderByUpload">Order By Upload</string>
+    <string name="orderByViewCount">Order By ViewCount</string>
+    <string name="opensourceLicense">Open-source license</string>
+    <string name="motivationHome">동기부여(home)</string>
+    <string name="exerciseVlog">운동브이로그</string>
+    <string name="exerciseMotivation">운동동기부여</string>
+    <string name="studyingVlog">공부브이로그</string>
 </resources>
