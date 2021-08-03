@@ -1,13 +1,17 @@
 package com.naple.android.one_day_one_motivation.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.naple.android.one_day_one_motivation.R
 import com.naple.android.one_day_one_motivation.model.Video
+import com.naple.android.one_day_one_motivation.view.videoscreen.VideoScreenActivity
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
@@ -56,7 +60,12 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
 
         holder.itemView.setOnClickListener{
 
-            itemClickListener.onClickItem(it, position)
+            //클릭한 영상 channelId
+            val videoId: String = videoList.get(position).id
+            val context: Context = holder.itemView.context
+            val intent = Intent(context, VideoScreenActivity::class.java)
+            intent.putExtra("videoId", videoId)
+            context.startActivity(intent)
         }
     }
 

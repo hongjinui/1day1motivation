@@ -14,7 +14,7 @@ class SplashPresenter : SplashContract.Presenter{
         val retrofit = retrofitMongo.getRetrofit()
         retrofit.getUser(uuid).enqueue(object : Callback<Map<String, String>> {
             override fun onResponse(call: Call<Map<String, String>>, response: Response<Map<String, String>>) {
-                if (response.isSuccessful ?: false) {
+                if (response.isSuccessful) {
                     var result : Map<String, String>? = response.body() // stateCode: 200, msg: success
 
                 }

@@ -22,6 +22,11 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".view.videoscreen.VideoScreenActivity"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="landscape" />
+
         <activity android:name=".view.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">

@@ -1,6 +1,5 @@
 package com.naple.android.one_day_one_motivation.view.videoscreen
 
-import android.content.res.Configuration
 import android.os.Bundle
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult

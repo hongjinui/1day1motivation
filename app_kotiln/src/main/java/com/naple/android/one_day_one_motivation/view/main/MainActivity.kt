@@ -6,15 +6,14 @@ import android.os.Process
 import android.os.StrictMode
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.navigation.NavigationView
 import com.naple.android.one_day_one_motivation.R
-import com.naple.android.one_day_one_motivation.adapter.MainAdapter
 import com.naple.android.one_day_one_motivation.databinding.ActivityMainBinding
 import com.naple.android.one_day_one_motivation.view.license.OpnSrcActivity
 import com.naple.android.one_day_one_motivation.view.main.presenter.MainContract
@@ -60,6 +59,10 @@ class MainActivity : AppCompatActivity(),
         binding.RecyclerView.setHasFixedSize(true)
 
 
+        // adMob
+        val adRequest = AdRequest.Builder().build()
+        binding.AdView.loadAd(adRequest)
+
         /*
          * keyword
          * 0 : 동기부여
@@ -73,28 +76,6 @@ class MainActivity : AppCompatActivity(),
         presenter.setVideoList(keyword)
     }
 
-
-    override fun onStart() {
-        super.onStart()
- /*
-        Log.d("test", "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-
-        var list = presenter.getAdapter().videoList
-
-        for(v: Video in list){
-            Log.d("check", v.channelTitle)
-        }
-*/
-        presenter.getAdapter().setOnItemClickListener(object :MainAdapter.OnItemClickListener{
-            override fun onClickItem(view: View, position: Int) {
-                //클릭한 영상 channelId
-                Toast.makeText(applicationContext,"test $position",Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
-
-    }
 
     //네비게이션 아이템 클릭 시
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

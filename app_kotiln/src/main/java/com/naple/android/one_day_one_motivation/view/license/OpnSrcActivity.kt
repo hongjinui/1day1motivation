@@ -44,7 +44,7 @@ class OpnSrcActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayList)
         listView.adapter = adapter
 
-        listView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             val intent = Intent(application, LicenseActivity::class.java)
             intent.putExtra("itemText", arrayList[i])
             startActivity(intent)
