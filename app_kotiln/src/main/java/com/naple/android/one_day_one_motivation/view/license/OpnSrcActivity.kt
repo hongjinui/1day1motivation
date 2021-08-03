@@ -15,7 +15,6 @@ import java.util.*
 class OpnSrcActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOpnSrcBinding
-    private lateinit var actionBar: ActionBar
     private lateinit var listView: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +24,12 @@ class OpnSrcActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle("오픈소스 라이선스")
+        // 툴바
+        val toolbarView = binding.ToolbarOpnsrc
+        setSupportActionBar(toolbarView)
+        val toobar = supportActionBar!!
+        toobar.setDisplayHomeAsUpEnabled(true)
+        toobar.setTitle("오픈소스 라이선스")
 
         val arrayList: MutableList<String> = ArrayList()
         arrayList.add("Android material SDK")

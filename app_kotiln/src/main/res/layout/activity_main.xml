@@ -5,6 +5,7 @@
     android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
     tools:context=".view.main.MainActivity">
 
@@ -12,6 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/ToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:titleTextAppearance="@style/TooBar.TitleText"
+            app:subtitleTextAppearance="@style/TooBar.SubText"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerView"
@@ -25,13 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom">
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/AdView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/adUnitIdTest"/>
+            ads:adUnitId="@string/adUnitId" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -39,8 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/menu_navigation"
-        />
+        app:menu="@menu/menu_navigation" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

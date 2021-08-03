@@ -10,9 +10,11 @@
     >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/Toolbar_settings"
+        android:id="@+id/Toolbar_opnsrc"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize" />
+        android:layout_height="?actionBarSize"
+        app:titleTextAppearance="@style/TooBar.TitleText"
+        />
 
     <ListView
         android:id="@+id/ListView"

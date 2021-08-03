@@ -1,25 +1,37 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.1day1motivation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>               <!--액션 바의 배경색-->
         <item name="colorAccent">@color/teal_200</item>             <!--강조 색-->
-        <!-- Customize your theme here. -->
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
-        <item name="actionBarSize">58dp</item>
 
         <!--actionBar-->
         <item name="android:subtitleTextColor">@color/actionBarSubTitleText</item>
+        <item name="actionBarSize">58dp</item>
         <!--statusBar-->
         <item name="android:statusBarColor" >@color/primaryDark</item>  <!-- 상태바의 배경색-->
         <item name="android:windowLightStatusBar" >true</item>          <!-- 상태바 아이콘 ture : 검은색 아이콘 -->
 
-        <item name="android:background">?attr/selectableItemBackground</item>
-
+        <item name="android:actionOverflowButtonStyle">@style/ActionBarButtonOverflow</item>
     </style>
 
     <!--splash theme-->
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>       <!--상태바 숨김 처리-->
+    </style>
+
+    <!--toolBar optionItem-->
+    <style name="ActionBarButtonOverflow" parent="android:Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/settings</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- toolBar text size-->
+    <style name="TooBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="TooBar.SubText" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

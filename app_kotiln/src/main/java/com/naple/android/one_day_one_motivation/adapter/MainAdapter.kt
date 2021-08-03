@@ -2,12 +2,12 @@ package com.naple.android.one_day_one_motivation.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.naple.android.one_day_one_motivation.R
 import com.naple.android.one_day_one_motivation.model.Video
@@ -53,7 +53,7 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
         val decimalFormat = DecimalFormat("###,###")
 
         holder.title.text = videoList.get(position).title
-        holder.channelTitle.text = videoList.get(position).channelTitle
+        holder.channelTitle.text = "BY ${videoList.get(position).channelTitle}"
         holder.duration.text = formatDuration(videoList.get(position).duration)
         holder.viewCount.text = "${decimalFormat.format(Integer.parseInt(videoList.get(position).viewCount))} views · ${videoList.get(position).date}"
         Picasso.get().load(videoList.get(position).url).into(holder.thumnail)
@@ -71,33 +71,42 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
 
     override fun getItemCount(): Int = videoList.size
 
-    private fun formatDuration(duration: String): String? {
-        var duration = duration
-        duration = duration.replace("PT", "")
-        val strArr: Array<String?> = duration.split("M".toRegex()).toTypedArray()
+    private fun formatDuration(duration: String): String {
+        var playtime = duration
+
+
+
+        playtime = playtime.replace("PT", "").trim()
+        val strArr: List<String> = playtime.split("M")
         var mm: String? = ""
         var ss: String? = ""
-
+        Log.d("formatDuration playtime", playtime)
         // 영상 시간이 mm,ss 둘 다 있을 때
-        if (strArr.size == 2) {
-            if (strArr[0] != null && strArr[0]!!.length == 1) {
+        if ( strArr[1].isNotEmpty()) {
+            Log.d("true", playtime.length.toString())
+            for(s: String in strArr){
+                println("$s@@@@@")
+            }
+
+            if (strArr[0].length == 1) {
                 mm = "0" + strArr[0]
-            } else if (strArr[0] != null) {
+            } else {
                 mm = strArr[0]
             }
-            if (strArr[1] != null && strArr[1]!!.length == 1) {
+            if (strArr[1].length == 1) {
                 ss = "00"
-            } else if (strArr[1] != null && strArr[1]!!.length == 2) {
+            } else if (strArr[1].length == 2) {
                 ss = "0" + strArr[1]
-            } else if (strArr[1] != null) {
+            } else{
                 ss = strArr[1]
             }
-            ss = ss!!.replace("S", "")
+            ss = ss.replace("S", "")
             // mm만 있을때
         } else {
-            if (strArr[0] != null && strArr[0]!!.length == 1) {
+            Log.d("false", playtime.length.toString())
+            if (strArr[0].length == 1) {
                 mm = "0" + strArr[0]
-            } else if (strArr[0] != null) {
+            } else {
                 mm = strArr[0]
             }
             ss = "00"

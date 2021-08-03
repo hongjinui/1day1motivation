@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(),
 
         super.onCreate(savedInstanceState)
 
-        // main thread가 disk I/O나 network 작업을 하는지 감시
+        // main thread가 disk I/O나 network 작업을 하는지 감지
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
@@ -39,15 +39,19 @@ class MainActivity : AppCompatActivity(),
 
         setContentView(binding.root)
 
-        // 액션바
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
-        supportActionBar?.setTitle("동기부여")
-        supportActionBar?.setSubtitle("업로드순서")
+        // 툴바
+        val toolbarView = binding.ToolBar
+        setSupportActionBar(toolbarView)
+        val toobar = supportActionBar!!
+        toobar.setDisplayHomeAsUpEnabled(true)
+        toobar.setHomeAsUpIndicator(R.drawable.menu)
+        toobar.setTitle("동기부여")
+        toobar.setSubtitle("업로드순서")
 
 
         // 네비게이션 바
         binding.NavigationView.setNavigationItemSelectedListener(this)
+        binding.NavigationView.itemIconTintList = null
 
         // presenter 초기화
         presenter = MainPresenter(recyclerView = binding.RecyclerView,mainContext = applicationContext)
@@ -84,7 +88,7 @@ class MainActivity : AppCompatActivity(),
         when (item.itemId) {
             R.id.home_motivation -> {
                 keyword = "0"
-                toolbarKeyword = "동기부여(home)"
+                toolbarKeyword = "동기부여"
             }
             R.id.exercise_motivation -> {
                 keyword = "1"
@@ -109,7 +113,7 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
-    //액션바 메뉴 inflate
+    //툴바 메뉴 inflate
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.actionbar_menu, menu)
         orderUpload = menu.findItem(R.id.orderUpload)
@@ -117,7 +121,7 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
-    // 액션바 아이템 클릭 시
+    // 툴바 아이템 클릭 시
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> binding.DrawerLayout.openDrawer(GravityCompat.START)

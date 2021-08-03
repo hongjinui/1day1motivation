@@ -12,7 +12,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 11
-        versionName "1.0.7"
+        versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,13 +21,11 @@ android {
         release {
             // 코드, 리소스 축소 난독화 최적화
             minifyEnabled = false
-            shrinkResources = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         /*
         debug{
             minifyEnabled = false
-            shrinkResources = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-debug.pro'
               }
             */
@@ -62,13 +60,13 @@ dependencies {
 
     // 이미지처리
     implementation 'com.squareup.picasso:picasso:2.71828'
-    // Apache-2.0 License
 
     // http
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    // Apache-2.0 License
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
 
     //adMob
     implementation 'com.google.android.gms:play-services-ads:20.2.0'
+
+
 }

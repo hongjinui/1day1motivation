@@ -24,8 +24,13 @@ class LicenseActivity : AppCompatActivity(){
         val intent : Intent = getIntent()
         val itemText : String? = intent.getStringExtra("itemText")
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(itemText)
+
+        // 툴바
+        val toolbarView = binding.ToolbarLicense
+        setSupportActionBar(toolbarView)
+        val toobar = supportActionBar!!
+        toobar.setDisplayHomeAsUpEnabled(true)
+        toobar.setTitle(itemText)
 
         textView = binding.TextViewLicense
         textView.movementMethod = ScrollingMovementMethod.getInstance()
