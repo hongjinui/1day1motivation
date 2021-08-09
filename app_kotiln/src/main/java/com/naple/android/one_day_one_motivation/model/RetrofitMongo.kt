@@ -11,7 +11,6 @@ class RetrofitMongo {
     }
 
     fun getRetrofit(): RetrofitService {
-        Log.d("VideoListData", "getRetrofit() ")
         val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

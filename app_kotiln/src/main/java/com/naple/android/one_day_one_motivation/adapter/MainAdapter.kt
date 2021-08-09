@@ -26,20 +26,6 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
         val thumnail = itemView.findViewById<ImageView>(R.id.ImageView_thumbnail)
     }
 
-    // 호출 할 때 초기화 하겠다.
-    private lateinit var itemClickListener : OnItemClickListener
-
-    //
-    interface OnItemClickListener{
-        fun onClickItem(view : View, position: Int)
-    }
-
-    //
-    fun setOnItemClickListener(listener: OnItemClickListener){
-        this.itemClickListener = listener
-    }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
         // Create a new view, which defines the UI of the list item
         val view: View = LayoutInflater.from(parent.context)
@@ -74,20 +60,12 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
     private fun formatDuration(duration: String): String {
         var playtime = duration
 
-
-
         playtime = playtime.replace("PT", "").trim()
         val strArr: List<String> = playtime.split("M")
         var mm: String? = ""
         var ss: String? = ""
-        Log.d("formatDuration playtime", playtime)
         // 영상 시간이 mm,ss 둘 다 있을 때
         if ( strArr[1].isNotEmpty()) {
-            Log.d("true", playtime.length.toString())
-            for(s: String in strArr){
-                println("$s@@@@@")
-            }
-
             if (strArr[0].length == 1) {
                 mm = "0" + strArr[0]
             } else {

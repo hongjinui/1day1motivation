@@ -24,28 +24,9 @@ class MainPresenter(
 
     override fun setVideoList(keyword: String) {
 
-//        Log.d("MainPresenter", "setVideoList() ")
-
         retrofitMongo = RetrofitMongo()
         val retrofit = retrofitMongo.getRetrofit()
-        /*retrofit.getData(keyword).enqueue(object : Callback<ArrayList<Video>> {
-            override fun onResponse(call: Call<ArrayList<Video>>, response: Response<ArrayList<Video>>) {
-                if (response.isSuccessful ?: false) {
-//                    Log.d("MainPresenter", "onResponse() ")
-                    videoList.clear()
-                    videoList = response.body()!!
 
-                    recyclerView.adapter = MainAdapter(videoList)
-
-                    listForAdapter = videoList
-
-
-                }
-            }
-            override fun onFailure(call: Call<ArrayList<Video>>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })*/
         try {
             val response = retrofit.getData(keyword).execute()
             if(response.isSuccessful){

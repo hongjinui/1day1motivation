@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.naple.android.one_day_one_motivation.databinding.ActivityOpnSrcBinding
 import java.util.*
