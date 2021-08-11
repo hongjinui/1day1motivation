@@ -26,9 +26,9 @@ class OpnSrcActivity : AppCompatActivity() {
         // 툴바
         val toolbarView = binding.ToolbarOpnsrc
         setSupportActionBar(toolbarView)
-        val toobar = supportActionBar!!
-        toobar.setDisplayHomeAsUpEnabled(true)
-        toobar.setTitle("오픈소스 라이선스")
+        val toolBar = supportActionBar!!
+        toolBar.setDisplayHomeAsUpEnabled(true)
+        toolBar.title = "오픈소스 라이선스"
 
         val arrayList: MutableList<String> = ArrayList()
         arrayList.add("Android material SDK")

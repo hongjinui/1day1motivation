@@ -21,16 +21,16 @@ class LicenseActivity : AppCompatActivity(){
         setContentView(binding.root)
 
 
-        val intent : Intent = getIntent()
+        val intent : Intent = intent
         val itemText : String? = intent.getStringExtra("itemText")
 
 
         // 툴바
         val toolbarView = binding.ToolbarLicense
         setSupportActionBar(toolbarView)
-        val toobar = supportActionBar!!
-        toobar.setDisplayHomeAsUpEnabled(true)
-        toobar.setTitle(itemText)
+        val toolBar = supportActionBar!!
+        toolBar.setDisplayHomeAsUpEnabled(true)
+        toolBar.title = itemText
 
         textView = binding.TextViewLicense
         textView.movementMethod = ScrollingMovementMethod.getInstance()
@@ -39,7 +39,7 @@ class LicenseActivity : AppCompatActivity(){
             val inputStream = resources.openRawResource(R.raw.license)
             val str: String = inputStream.bufferedReader().use { it.readText() }
 
-            textView.setText(str)
+            textView.text = str
 
         }catch (e : Exception){
             e.printStackTrace()

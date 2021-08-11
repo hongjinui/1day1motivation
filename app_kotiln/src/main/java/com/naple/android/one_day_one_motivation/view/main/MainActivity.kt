@@ -18,6 +18,7 @@ import com.naple.android.one_day_one_motivation.databinding.ActivityMainBinding
 import com.naple.android.one_day_one_motivation.view.license.OpnSrcActivity
 import com.naple.android.one_day_one_motivation.view.main.presenter.MainContract
 import com.naple.android.one_day_one_motivation.view.main.presenter.MainPresenter
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity(),
         MainContract.View, NavigationView.OnNavigationItemSelectedListener {
@@ -31,10 +32,6 @@ class MainActivity : AppCompatActivity(),
 
         super.onCreate(savedInstanceState)
 
-        // main thread가 disk I/O나 network 작업을 하는지 감지
-        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
@@ -42,12 +39,11 @@ class MainActivity : AppCompatActivity(),
         // 툴바
         val toolbarView = binding.ToolBar
         setSupportActionBar(toolbarView)
-        val toobar = supportActionBar!!
-        toobar.setDisplayHomeAsUpEnabled(true)
-        toobar.setHomeAsUpIndicator(R.drawable.menu)
-        toobar.setTitle("동기부여")
-        toobar.setSubtitle("업로드순서")
-
+        val toolBar = supportActionBar!!
+        toolBar.setDisplayHomeAsUpEnabled(true)
+        toolBar.setHomeAsUpIndicator(R.drawable.menu)
+        toolBar.title = "동기부여"
+        toolBar.subtitle = "업로드순서"
 
         // 네비게이션 바
         binding.NavigationView.setNavigationItemSelectedListener(this)
@@ -104,9 +100,9 @@ class MainActivity : AppCompatActivity(),
             }
         }
         binding.DrawerLayout.closeDrawer(binding.NavigationView)
-        supportActionBar?.setTitle(toolbarKeyword)
-        supportActionBar?.setSubtitle("업로드순서")
-        orderUpload.setChecked(true)
+        supportActionBar?.title = toolbarKeyword
+        supportActionBar?.subtitle = "업로드순서"
+        orderUpload.isChecked = true
 
         presenter.setVideoList(keyword)
 
@@ -131,10 +127,10 @@ class MainActivity : AppCompatActivity(),
             R.id.sort -> {
                 val subtitle = supportActionBar?.subtitle.toString()
                 if(subtitle.equals("업로드순서")){
-                    orderViewCount.setChecked(true)
+                    orderViewCount.isChecked = true
                     presenter.sortVideoList(item,"조회수순서",true,supportActionBar!!)
                 }else{
-                    orderUpload.setChecked(true)
+                    orderUpload.isChecked = true
                     presenter.sortVideoList(item,"업로드순서",true,supportActionBar!!)
                 }
             }
@@ -164,7 +160,7 @@ class MainActivity : AppCompatActivity(),
         } else {
             //2초 이내에 뒤로가기 버튼을 재 클릭 시 앱 종료
             if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
-                AppFinish()
+                appFinish()
                 return
             }
             Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
@@ -173,10 +169,9 @@ class MainActivity : AppCompatActivity(),
     }
 
     //앱종료
-    fun AppFinish() {
+    private fun appFinish() {
         finish()
-        System.exit(0)
-        Process.killProcess(Process.myPid())
+        exitProcess(0)
     }
 
 }

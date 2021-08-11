@@ -19,14 +19,14 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
 
     // 뷰 홀더 inner class
     class MainViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val title = itemView.findViewById<TextView>(R.id.TextView_title)
-        val channelTitle = itemView.findViewById<TextView>(R.id.TextView_channelTitle)
-        val duration = itemView.findViewById<TextView>(R.id.TextView_duration)
-        val viewCount = itemView.findViewById<TextView>(R.id.TextView_viewCount)
-        val thumnail = itemView.findViewById<ImageView>(R.id.ImageView_thumbnail)
+        val title: TextView = itemView.findViewById(R.id.TextView_title)
+        val channelTitle: TextView = itemView.findViewById(R.id.TextView_channelTitle)
+        val duration: TextView = itemView.findViewById(R.id.TextView_duration)
+        val viewCount: TextView = itemView.findViewById(R.id.TextView_viewCount)
+        val thumbnail: ImageView = itemView.findViewById(R.id.ImageView_thumbnail)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         // Create a new view, which defines the UI of the list item
         val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recyclerview_item, parent, false)
@@ -34,20 +34,20 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
         return MainViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MainAdapter.MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
 
         val decimalFormat = DecimalFormat("###,###")
 
-        holder.title.text = videoList.get(position).title
-        holder.channelTitle.text = "BY ${videoList.get(position).channelTitle}"
-        holder.duration.text = formatDuration(videoList.get(position).duration)
-        holder.viewCount.text = "${decimalFormat.format(Integer.parseInt(videoList.get(position).viewCount))} views · ${videoList.get(position).date}"
-        Picasso.get().load(videoList.get(position).url).into(holder.thumnail)
+        holder.title.text = videoList[position].title
+        holder.channelTitle.text = "BY ${videoList[position].channelTitle}"
+        holder.duration.text = formatDuration(videoList[position].duration)
+        holder.viewCount.text = "${decimalFormat.format(Integer.parseInt(videoList[position].viewCount))} views · ${videoList[position].date}"
+        Picasso.get().load(videoList[position].url).into(holder.thumbnail)
 
         holder.itemView.setOnClickListener{
 
             //클릭한 영상 channelId
-            val videoId: String = videoList.get(position).id
+            val videoId: String = videoList[position].id
             val context: Context = holder.itemView.context
             val intent = Intent(context, VideoScreenActivity::class.java)
             intent.putExtra("videoId", videoId)
@@ -66,26 +66,30 @@ class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainA
         var ss: String? = ""
         // 영상 시간이 mm,ss 둘 다 있을 때
         if ( strArr[1].isNotEmpty()) {
-            if (strArr[0].length == 1) {
-                mm = "0" + strArr[0]
+            mm = if (strArr[0].length == 1) {
+                "0" + strArr[0]
             } else {
-                mm = strArr[0]
+                strArr[0]
             }
-            if (strArr[1].length == 1) {
-                ss = "00"
-            } else if (strArr[1].length == 2) {
-                ss = "0" + strArr[1]
-            } else{
-                ss = strArr[1]
+            ss = when (strArr[1].length) {
+                1 -> {
+                    "00"
+                }
+                2 -> {
+                    "0" + strArr[1]
+                }
+                else -> {
+                    strArr[1]
+                }
             }
             ss = ss.replace("S", "")
             // mm만 있을때
         } else {
             Log.d("false", playtime.length.toString())
-            if (strArr[0].length == 1) {
-                mm = "0" + strArr[0]
+            mm = if (strArr[0].length == 1) {
+                "0" + strArr[0]
             } else {
-                mm = strArr[0]
+                strArr[0]
             }
             ss = "00"
         }

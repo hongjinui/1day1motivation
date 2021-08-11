@@ -14,7 +14,7 @@ class RetrofitMongo {
         val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build()
         return  retrofit.create(RetrofitService::class.java)
     }
 

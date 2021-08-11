@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() , SplashContract.View{
         val sharedPreferences = getSharedPreferences(getString(R.string.shardPreferences), MODE_PRIVATE)
         var uuid = sharedPreferences.getString("uuid", "")
 
-        // 개인설정 파일에 UUID에 대한 데이터가 없다면 생성하여 저장하기
+        // 개인설정 파일에 UUID가 없다면 생성하여 저장하기
         if (uuid == null || uuid == "") {
             val editor = sharedPreferences.edit()
             uuid = UUID.randomUUID().toString()
@@ -41,10 +41,10 @@ class SplashActivity : AppCompatActivity() , SplashContract.View{
         presenter.loginInsertOrUpdate(uuid)
 
         val handler = Handler()
-        handler.postDelayed(splashHandler(), 600)
+        handler.postDelayed(SplashHandler(), 600)
     }
 
-    private inner class splashHandler : Runnable {
+    private inner class SplashHandler : Runnable {
         override fun run() {
             startActivity(Intent(application, MainActivity::class.java))
             finish()
