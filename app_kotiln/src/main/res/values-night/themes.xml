@@ -19,7 +19,8 @@
 
     <!--splash theme-->
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowFullscreen">true</item>       <!--상태바 숨김 처리-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor" >@color/white</item>  <!-- 상태바의 배경색-->
     </style>
 
     <!--toolBar optionItem-->

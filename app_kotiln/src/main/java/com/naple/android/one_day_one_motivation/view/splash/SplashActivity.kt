@@ -3,6 +3,8 @@ package com.naple.android.one_day_one_motivation.view.splash
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.naple.android.one_day_one_motivation.R
 import com.naple.android.one_day_one_motivation.databinding.ActivitySplashBinding
@@ -40,14 +42,9 @@ class SplashActivity : AppCompatActivity() , SplashContract.View{
         presenter = SplashPresenter()
         presenter.loginInsertOrUpdate(uuid)
 
-        val handler = Handler()
-        handler.postDelayed(SplashHandler(), 600)
-    }
+        Handler(Looper.getMainLooper()).postDelayed(
+                {startActivity(Intent(application, MainActivity::class.java))}
+                ,600)
 
-    private inner class SplashHandler : Runnable {
-        override fun run() {
-            startActivity(Intent(application, MainActivity::class.java))
-            finish()
-        }
     }
 }

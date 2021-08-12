@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(),
 
     //앱종료
     private fun appFinish() {
-        finish()
+        finishAffinity()
         exitProcess(0)
     }
 
