@@ -8,9 +8,10 @@ import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
 import com.naple.android.one_day_one_motivation.R
 import com.naple.android.one_day_one_motivation.databinding.ActivityVideoScreenBinding
+import com.naple.android.one_day_one_motivation.view.videoscreen.presenter.VideoScreenContract
 
 
-class VideoScreenActivity : YouTubeBaseActivity() {
+class VideoScreenActivity : YouTubeBaseActivity() , VideoScreenContract.View{
 
     private lateinit var binding: ActivityVideoScreenBinding
     private lateinit var youtubeView: YouTubePlayerView

@@ -2,8 +2,6 @@ package com.naple.android.one_day_one_motivation.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Process
-import android.os.StrictMode
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast

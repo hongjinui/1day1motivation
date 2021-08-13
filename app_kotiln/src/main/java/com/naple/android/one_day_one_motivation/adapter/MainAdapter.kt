@@ -15,7 +15,7 @@ import com.naple.android.one_day_one_motivation.view.videoscreen.VideoScreenActi
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
-class MainAdapter(val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainAdapter.MainViewHolder>(){
+class MainAdapter(private val videoList : ArrayList<Video>) : RecyclerView.Adapter<MainAdapter.MainViewHolder>(){
 
     // 뷰 홀더 inner class
     class MainViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){

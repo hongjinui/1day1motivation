@@ -1,6 +1,5 @@
 package com.naple.android.one_day_one_motivation.view.license
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,8 +7,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.naple.android.one_day_one_motivation.R
+import com.naple.android.one_day_one_motivation.adapter.OpnSrcAdapter
 import com.naple.android.one_day_one_motivation.databinding.ActivityOpnSrcBinding
 import java.util.*
+import kotlin.collections.ArrayList
 
 class OpnSrcActivity : AppCompatActivity() {
 
@@ -30,7 +32,7 @@ class OpnSrcActivity : AppCompatActivity() {
         toolBar.setDisplayHomeAsUpEnabled(true)
         toolBar.title = "오픈소스 라이선스"
 
-        val arrayList: MutableList<String> = ArrayList()
+        val arrayList: ArrayList<String> = ArrayList()
         arrayList.add("Android material SDK")
         arrayList.add("Androidx appcompat library")
         arrayList.add("Androidx constraintlayout library")
@@ -43,20 +45,19 @@ class OpnSrcActivity : AppCompatActivity() {
         arrayList.add("YouTubeAndroidPlayerApi library")
 
         listView = binding.ListView
-        val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayList)
-        listView.adapter = adapter
-
+        listView.adapter = OpnSrcAdapter(arrayList)
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             val intent = Intent(application, LicenseActivity::class.java)
             intent.putExtra("itemText", arrayList[i])
             startActivity(intent)
         }
+
     }
 
     // 메뉴 아이템 선택 이벤트
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.home) {
-            finish()
+        when (item.itemId) {
+            android.R.id.home -> finish()
         }
         return true
     }
