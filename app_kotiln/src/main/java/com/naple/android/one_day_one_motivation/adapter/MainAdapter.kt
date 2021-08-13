@@ -19,81 +19,83 @@ class MainAdapter(private val videoList : ArrayList<Video>) : RecyclerView.Adapt
 
     // 뷰 홀더 inner class
     class MainViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val title: TextView = itemView.findViewById(R.id.TextView_title)
-        val channelTitle: TextView = itemView.findViewById(R.id.TextView_channelTitle)
-        val duration: TextView = itemView.findViewById(R.id.TextView_duration)
-        val viewCount: TextView = itemView.findViewById(R.id.TextView_viewCount)
-        val thumbnail: ImageView = itemView.findViewById(R.id.ImageView_thumbnail)
+
+        private val title: TextView = itemView.findViewById(R.id.TextView_title)
+        private val channelTitle: TextView = itemView.findViewById(R.id.TextView_channelTitle)
+        private val duration: TextView = itemView.findViewById(R.id.TextView_duration)
+        private val viewCount: TextView = itemView.findViewById(R.id.TextView_viewCount)
+        private val thumbnail: ImageView = itemView.findViewById(R.id.ImageView_thumbnail)
+
+        fun bind(item : Video){
+            val decimalFormat = DecimalFormat("###,###")
+
+            title.text = item.title
+            channelTitle.text = "BY ${item.channelTitle}"
+            duration.text = formatDuration(item.duration)
+            viewCount.text = "${decimalFormat.format(Integer.parseInt(item.viewCount))} views · ${item.date}"
+            Picasso.get().load(item.url).into(thumbnail)
+            itemView.setOnClickListener{
+                //클릭한 영상 channelId
+                val videoId: String = item.id
+                val context: Context = itemView.context
+                val intent = Intent(context, VideoScreenActivity::class.java)
+                intent.putExtra("videoId", videoId)
+                context.startActivity(intent)
+            }
+        }
+        private fun formatDuration(duration: String): String {
+            var playtime = duration
+            playtime = playtime.replace("PT", "").trim()
+            val strArr: List<String> = playtime.split("M")
+            var mm: String? = ""
+            var ss: String? = ""
+            // 영상 시간이 mm,ss 둘 다 있을 때
+            if ( strArr[1].isNotEmpty()) {
+                mm = if (strArr[0].length == 1) {
+                    "0" + strArr[0]
+                } else {
+                    strArr[0]
+                }
+                ss = when (strArr[1].length) {
+                    1 -> {
+                        "00"
+                    }
+                    2 -> {
+                        "0" + strArr[1]
+                    }
+                    else -> {
+                        strArr[1]
+                    }
+                }
+                ss = ss.replace("S", "")
+                // mm만 있을때
+            } else {
+                Log.d("false", playtime.length.toString())
+                mm = if (strArr[0].length == 1) {
+                    "0" + strArr[0]
+                } else {
+                    strArr[0]
+                }
+                ss = "00"
+            }
+            return "$mm:$ss"
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         // Create a new view, which defines the UI of the list item
         val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recyclerview_item, parent, false)
-
         return MainViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        holder.bind(videoList[position])
 
-        val decimalFormat = DecimalFormat("###,###")
-
-        holder.title.text = videoList[position].title
-        holder.channelTitle.text = "BY ${videoList[position].channelTitle}"
-        holder.duration.text = formatDuration(videoList[position].duration)
-        holder.viewCount.text = "${decimalFormat.format(Integer.parseInt(videoList[position].viewCount))} views · ${videoList[position].date}"
-        Picasso.get().load(videoList[position].url).into(holder.thumbnail)
-
-        holder.itemView.setOnClickListener{
-
-            //클릭한 영상 channelId
-            val videoId: String = videoList[position].id
-            val context: Context = holder.itemView.context
-            val intent = Intent(context, VideoScreenActivity::class.java)
-            intent.putExtra("videoId", videoId)
-            context.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int = videoList.size
 
-    private fun formatDuration(duration: String): String {
-        var playtime = duration
 
-        playtime = playtime.replace("PT", "").trim()
-        val strArr: List<String> = playtime.split("M")
-        var mm: String? = ""
-        var ss: String? = ""
-        // 영상 시간이 mm,ss 둘 다 있을 때
-        if ( strArr[1].isNotEmpty()) {
-            mm = if (strArr[0].length == 1) {
-                "0" + strArr[0]
-            } else {
-                strArr[0]
-            }
-            ss = when (strArr[1].length) {
-                1 -> {
-                    "00"
-                }
-                2 -> {
-                    "0" + strArr[1]
-                }
-                else -> {
-                    strArr[1]
-                }
-            }
-            ss = ss.replace("S", "")
-            // mm만 있을때
-        } else {
-            Log.d("false", playtime.length.toString())
-            mm = if (strArr[0].length == 1) {
-                "0" + strArr[0]
-            } else {
-                strArr[0]
-            }
-            ss = "00"
-        }
-        return "$mm:$ss"
-    }
 
 }

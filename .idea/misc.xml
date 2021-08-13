@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/drawable/splash.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/layout/activity_license.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/layout/activity_opn_src.xml" value="0.2765625" />
+        <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/layout/activity_splash.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/layout/listview_item.xml" value="0.2765625" />
         <entry key="..\:/Users/houag/StudioProjects/1day1motivation/app_kotiln/src/main/res/layout/recyclerview_item.xml" value="0.1" />
       </map>

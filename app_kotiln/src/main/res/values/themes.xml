@@ -28,6 +28,10 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="TextSize">
+        <item name="android:textSize">25sp</item>
+    </style>
+
     <!-- toolBar text size-->
     <style name="TooBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">15sp</item>

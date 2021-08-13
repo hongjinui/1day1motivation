@@ -46,11 +46,6 @@ class OpnSrcActivity : AppCompatActivity() {
 
         listView = binding.ListView
         listView.adapter = OpnSrcAdapter(arrayList)
-        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
-            val intent = Intent(application, LicenseActivity::class.java)
-            intent.putExtra("itemText", arrayList[i])
-            startActivity(intent)
-        }
 
     }
 
