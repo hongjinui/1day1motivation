@@ -15,7 +15,7 @@ class VideoScreenActivity : YouTubeBaseActivity() , VideoScreenContract.View{
 
     private lateinit var binding: ActivityVideoScreenBinding
     private lateinit var youtubeView: YouTubePlayerView
-    private lateinit var listener : YouTubePlayer.OnInitializedListener
+    private var listener : YouTubePlayer.OnInitializedListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +23,16 @@ class VideoScreenActivity : YouTubeBaseActivity() , VideoScreenContract.View{
         binding = ActivityVideoScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        youtubeView = findViewById(R.id.YouTubePlayerView)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         val bundle: Bundle? = intent.extras
         val videoId: String? = bundle?.getString("videoId")
 
-        youtubeView = findViewById(R.id.YouTubePlayerView)
-//        youtubeView = binding.YouTubePlayerView
         listener = object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, b: Boolean) {
                 youTubePlayer.setFullscreen(true)
@@ -40,6 +45,12 @@ class VideoScreenActivity : YouTubeBaseActivity() , VideoScreenContract.View{
 
         youtubeView.initialize(videoId, listener)
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        listener = null
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

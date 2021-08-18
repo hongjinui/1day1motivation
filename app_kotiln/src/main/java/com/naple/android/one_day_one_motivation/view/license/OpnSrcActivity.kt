@@ -25,6 +25,11 @@ class OpnSrcActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         // 툴바
         val toolbarView = binding.ToolbarOpnsrc
         setSupportActionBar(toolbarView)
@@ -46,7 +51,12 @@ class OpnSrcActivity : AppCompatActivity() {
 
         listView = binding.ListView
         listView.adapter = OpnSrcAdapter(arrayList)
+    }
 
+    override fun onStop() {
+        super.onStop()
+
+        listView.adapter = null
     }
 
     // 메뉴 아이템 선택 이벤트

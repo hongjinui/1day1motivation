@@ -15,7 +15,7 @@ import java.util.*
 
 class SplashActivity : AppCompatActivity() , SplashContract.View{
 
-    private lateinit var presenter : SplashPresenter
+    private var presenter : SplashPresenter? = null
     private lateinit var binding: ActivitySplashBinding
 
 
@@ -26,11 +26,20 @@ class SplashActivity : AppCompatActivity() , SplashContract.View{
 
         setContentView(binding.root)
 
+        Handler(Looper.getMainLooper()).postDelayed(
+                {startActivity(Intent(application, MainActivity::class.java))}
+                ,600)
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+
         //개인설정 파일 데이터 불러오기
         val sharedPreferences = getSharedPreferences(getString(R.string.shardPreferences), MODE_PRIVATE)
         var uuid = sharedPreferences.getString("uuid", "")
 
-        // 개인설정 파일에 UUID가 없다면 생성하여 저장하기
+        // 개인설정 파일에 UUID 없다면 생성하여 저장하기
         if (uuid == null || uuid == "") {
             val editor = sharedPreferences.edit()
             uuid = UUID.randomUUID().toString()
@@ -40,11 +49,13 @@ class SplashActivity : AppCompatActivity() , SplashContract.View{
 //            uuid = sharedPreferences.getString("uuid", "");
         }
         presenter = SplashPresenter()
-        presenter.loginInsertOrUpdate(uuid)
+        presenter?.loginInsertOrUpdate(uuid)
 
-        Handler(Looper.getMainLooper()).postDelayed(
-                {startActivity(Intent(application, MainActivity::class.java))}
-                ,600)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        presenter = null
     }
 }

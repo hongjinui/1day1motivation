@@ -20,10 +20,8 @@ class LicenseActivity : AppCompatActivity(){
         binding = ActivityLicenseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val intent : Intent = intent
         val itemText : String? = intent.getStringExtra("itemText")
-
 
         // 툴바
         val toolbarView = binding.ToolbarLicense

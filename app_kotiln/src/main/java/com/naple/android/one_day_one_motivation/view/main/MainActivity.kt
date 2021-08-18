@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(),
     private lateinit var binding: ActivityMainBinding
     private lateinit var orderUpload: MenuItem
     private lateinit var orderViewCount: MenuItem
-    private lateinit var presenter : MainPresenter
+    private var presenter : MainPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity(),
         // 리사이클러 뷰 아이템의 크기 고정, false -> 매번 아이템 크기를 계산해서 성능저하ㅣ
         binding.RecyclerView.setHasFixedSize(true)
 
-
         // adMob
         val adRequest = AdRequest.Builder().build()
         binding.AdView.loadAd(adRequest)
@@ -71,7 +70,7 @@ class MainActivity : AppCompatActivity(),
          *
          */
         val keyword = "0"
-        presenter.setVideoList(keyword)
+        presenter?.setVideoList(keyword)
     }
 
 
@@ -102,7 +101,7 @@ class MainActivity : AppCompatActivity(),
         supportActionBar?.subtitle = "업로드순서"
         orderUpload.isChecked = true
 
-        presenter.setVideoList(keyword)
+        presenter?.setVideoList(keyword)
 
         return true
     }
@@ -120,16 +119,16 @@ class MainActivity : AppCompatActivity(),
         when (item.itemId) {
             android.R.id.home -> binding.DrawerLayout.openDrawer(GravityCompat.START)
             R.id.open_source_licence -> startActivity(Intent(application, OpnSrcActivity::class.java))
-            R.id.orderUpload -> presenter.sortVideoList(item,"업로드순서",false,supportActionBar!!)
-            R.id.orderViewCount -> presenter.sortVideoList(item,"조회수순서",false,supportActionBar!!)
+            R.id.orderUpload -> presenter?.sortVideoList(item,"업로드순서",false,supportActionBar!!)
+            R.id.orderViewCount -> presenter?.sortVideoList(item,"조회수순서",false,supportActionBar!!)
             R.id.sort -> {
                 val subtitle = supportActionBar?.subtitle.toString()
                 if(subtitle.equals("업로드순서")){
                     orderViewCount.isChecked = true
-                    presenter.sortVideoList(item,"조회수순서",true,supportActionBar!!)
+                    presenter?.sortVideoList(item,"조회수순서",true,supportActionBar!!)
                 }else{
                     orderUpload.isChecked = true
-                    presenter.sortVideoList(item,"업로드순서",true,supportActionBar!!)
+                    presenter?.sortVideoList(item,"업로드순서",true,supportActionBar!!)
                 }
             }
         }
@@ -140,8 +139,7 @@ class MainActivity : AppCompatActivity(),
     override fun onDestroy() {
         super.onDestroy()
 
-        //
-        presenter.release()
+        presenter = null
     }
 
 
